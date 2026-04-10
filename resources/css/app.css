@@ -62,6 +62,21 @@
     --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
     --color-sidebar-border: var(--sidebar-border);
     --color-sidebar-ring: var(--sidebar-ring);
+
+    /* Hub tenant-aware semantic tokens */
+    --color-hub-primary: var(--hub-primary);
+    --color-hub-primary-fg: var(--hub-primary-fg);
+    --color-hub-surface: var(--hub-surface);
+    --color-hub-surface-raised: var(--hub-surface-raised);
+    --color-hub-border: var(--hub-border);
+    --color-hub-text: var(--hub-text);
+    --color-hub-text-muted: var(--hub-text-muted);
+    --color-hub-text-faint: var(--hub-text-faint);
+    --color-hub-success: var(--hub-success);
+    --color-hub-danger: var(--hub-danger);
+    --color-hub-warning: var(--hub-warning);
+    --color-hub-nav-bg: var(--hub-nav-bg);
+    --color-hub-nav-border: var(--hub-nav-border);
 }
 
 :root {
@@ -98,6 +113,21 @@
     --sidebar-accent-foreground: oklch(0.205 0 0);
     --sidebar-border: oklch(0.922 0 0);
     --sidebar-ring: oklch(0.87 0 0);
+
+    /* Hub design tokens — tenant-customisable via inline style override */
+    --hub-primary: #D85A30;
+    --hub-primary-fg: #ffffff;
+    --hub-surface: #FBF8F4;
+    --hub-surface-raised: #ffffff;
+    --hub-border: #E8E6E0;
+    --hub-text: #2C2C2A;
+    --hub-text-muted: #5F5E5A;
+    --hub-text-faint: #888780;
+    --hub-success: #1D9E75;
+    --hub-danger: #E24B4A;
+    --hub-warning: #EF9F27;
+    --hub-nav-bg: #ffffff;
+    --hub-nav-border: #E8E6E0;
 }
 
 .dark {
@@ -133,6 +163,16 @@
     --sidebar-accent-foreground: oklch(0.985 0 0);
     --sidebar-border: oklch(0.269 0 0);
     --sidebar-ring: oklch(0.439 0 0);
+
+    /* Hub dark mode overrides */
+    --hub-surface: #1a1a1a;
+    --hub-surface-raised: #242424;
+    --hub-border: #333333;
+    --hub-text: #f0ede8;
+    --hub-text-muted: #a8a5a0;
+    --hub-text-faint: #777772;
+    --hub-nav-bg: #1a1a1a;
+    --hub-nav-border: #333333;
 }
 
 @layer base {
@@ -152,14 +192,28 @@
     }
 
     .hub-surface {
-        background-color: #fff;
-        border: 1px solid #e8e1d8;
-        box-shadow: 0 6px 16px rgba(37, 37, 37, 0.04);
+        background-color: var(--hub-surface-raised);
+        border: 0.5px solid var(--hub-border);
     }
 
     .hub-muted-surface {
-        background-color: #fbf8f4;
-        border: 1px solid #ece4da;
+        background-color: var(--hub-surface);
+        border: 0.5px solid var(--hub-border);
     }
+}
+
+/* Hub pulse animation for status dots */
+@keyframes hub-pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.35; }
+}
+
+.hub-pulse {
+    animation: hub-pulse 2s ease-in-out infinite;
+}
+
+/* Hub safe-area aware bottom padding */
+.hub-bottom-safe {
+    padding-bottom: max(env(safe-area-inset-bottom, 0px), 8px);
 }
 

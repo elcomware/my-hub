@@ -2,17 +2,10 @@ import { Link } from '@inertiajs/react';
 import type { Announcement } from '@/types';
 
 const tagStyles: Record<string, { bg: string; text: string }> = {
-    urgent: { bg: 'bg-[#F9EEF2]', text: 'text-[#8B1A3C]' },
-    event: { bg: 'bg-[#EBF7E6]', text: 'text-[#3A9828]' },
-    info: { bg: 'bg-[#E6F1FB]', text: 'text-[#185FA5]' },
-    operational: { bg: 'bg-[#FEF3DC]', text: 'text-[#A06B0A]' },
-};
-
-const avatarStyles: Record<string, string> = {
-    urgent: 'bg-[#F9EEF2] text-[#8B1A3C]',
-    event: 'bg-[#EBF7E6] text-[#3A9828]',
-    info: 'bg-[#E6F1FB] text-[#185FA5]',
-    operational: 'bg-[#FEF3DC] text-[#A06B0A]',
+    urgent: { bg: 'bg-[#FCEBEB]', text: 'text-[#A32D2D]' },
+    event: { bg: 'bg-[#E1F5EE]', text: 'text-[#0F6E56]' },
+    info: { bg: 'bg-[#FAEEDA]', text: 'text-[#633806]' },
+    operational: { bg: 'bg-[#F5F2ED]', text: 'text-[#5F5E5A]' },
 };
 
 function getInitials(name: string): string {
@@ -28,22 +21,16 @@ function formatRelativeTime(dateStr: string): string {
     const date = new Date(dateStr);
     const now = new Date();
     const diffMs = now.getTime() - date.getTime();
-    const diffHours = diffMs / (1000 * 60 * 60);
-    const diffDays = diffMs / (1000 * 60 * 60 * 24);
+    const diffMin = Math.floor(diffMs / (1000 * 60));
+    const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
+    const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
 
-    if (diffHours < 1) {
-        return 'Just now';
-    }
-
-    if (diffHours < 24) {
-        return `Today ${date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
-    }
-
-    return diffDays < 2
-        ? 'Yesterday'
-        : diffDays < 7
-          ? date.toLocaleDateString([], { weekday: 'short' })
-          : 'Last week';
+    if (diffMin < 1) return 'Just now';
+    if (diffMin < 60) return `${diffMin} min`;
+    if (diffHours < 24) return `${diffHours}h ago`;
+    if (diffDays < 2) return 'Yesterday';
+    if (diffDays < 7) return date.toLocaleDateString([], { weekday: 'short' });
+    return date.toLocaleDateString([], { day: 'numeric', month: 'short' });
 }
 
 type Props = {
@@ -53,44 +40,44 @@ type Props = {
 
 export function AnnouncementCard({ announcement: a, teamSlug }: Props) {
     const tag = tagStyles[a.tag] ?? tagStyles.info;
-    const avatar = avatarStyles[a.tag] ?? avatarStyles.info;
 
     return (
         <Link
             href={`/${teamSlug}/announcements/${a.id}`}
-            className="block rounded-[18px] border border-[#E8E1D8] bg-white p-3.5 shadow-[0_6px_16px_rgba(37,37,37,0.04)] transition-colors hover:border-[#C8DEC1] dark:border-neutral-800 dark:bg-neutral-900"
+            className="block rounded-[14px] border-[0.5px] border-hub-border bg-hub-surface-raised p-[13px] transition-colors hover:border-hub-primary/30"
         >
-            <div className="mb-2 flex items-center gap-2">
-                <div
-                    className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-[10px] font-bold ${avatar}`}
-                >
-                    {getInitials(a.authorName)}
-                </div>
-                <div className="min-w-0 flex-1">
-                    <p className="text-[11px] font-semibold text-[#2C2C2A] dark:text-white">
-                        {a.authorName}
-                    </p>
-                    <p className="text-[10px] text-[#888780]">
-                        {formatRelativeTime(a.publishedAt)}
-                    </p>
-                </div>
-                <span
-                    className={`rounded-md px-2 py-0.5 text-[10px] font-bold tracking-wide ${tag.bg} ${tag.text}`}
-                >
-                    {a.tag.charAt(0).toUpperCase() + a.tag.slice(1)}
-                </span>
+            <div className="flex gap-[10px]">
+                {/* Unread dot */}
                 {a.isRead === false && (
-                    <span className="h-2 w-2 shrink-0 rounded-full bg-[#185FA5]" />
+                    <span className="mt-[5px] h-2 w-2 shrink-0 rounded-full bg-hub-primary" />
                 )}
+
+                <div className="min-w-0 flex-1">
+                    <p className="text-[13px] leading-[1.45] text-hub-text">
+                        {a.title}
+                    </p>
+                    {a.body && (
+                        <p className="mt-1 line-clamp-2 text-[12px] leading-relaxed text-hub-text-muted">
+                            {a.body}
+                        </p>
+                    )}
+                    <div className="mt-[7px] flex items-center justify-between">
+                        <div className="flex items-center gap-[6px]">
+                            <span
+                                className={`inline-flex items-center gap-1 rounded-full px-[9px] py-[2px] text-[11px] font-medium ${tag.bg} ${tag.text}`}
+                            >
+                                {a.tag.charAt(0).toUpperCase() + a.tag.slice(1)}
+                            </span>
+                            <span className="text-[11px] text-hub-text-faint">
+                                {a.authorName}
+                            </span>
+                        </div>
+                        <span className="text-[11px] text-hub-text-faint">
+                            {formatRelativeTime(a.publishedAt)}
+                        </span>
+                    </div>
+                </div>
             </div>
-            <p className="text-[13px] font-semibold leading-snug text-[#2C2C2A] dark:text-white">
-                {a.title}
-            </p>
-            {a.body && (
-                <p className="mt-1 line-clamp-2 text-[11px] leading-relaxed text-[#6E6B66]">
-                    {a.body}
-                </p>
-            )}
         </Link>
     );
 }

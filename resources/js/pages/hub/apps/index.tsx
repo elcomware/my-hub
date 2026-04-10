@@ -72,29 +72,30 @@ function AppCatalog({ apps, categories }: Props) {
     return (
         <>
             <Head title="App Catalog" />
-            <div className="px-3.5 py-3.5">
-                <HubSectionCard className="mb-4">
-                    <p className="mb-2 text-[10px] font-medium uppercase tracking-[0.16em] text-[#888780]">
-                        Discover tools
-                    </p>
-                    <div className="hub-muted-surface flex items-center gap-2 rounded-[14px] px-3 py-2.5 dark:border-neutral-800 dark:bg-neutral-950">
-                        <Search className="h-3.5 w-3.5 shrink-0 text-[#888780]" />
-                        <input
-                            type="text"
-                            placeholder="Search an app…"
-                            value={search}
-                            onChange={(e) => setSearch(e.target.value)}
-                            className="w-full bg-transparent text-xs text-[#2C2C2A] placeholder-[#888780] outline-none dark:text-white"
-                        />
-                    </div>
-                </HubSectionCard>
+            <div className="px-4 py-4">
+                {/* Header */}
+                <p className="mb-3 font-hub-serif text-[20px] font-semibold text-hub-text">
+                    Apps
+                </p>
+
+                {/* Search — Sema-style with icon inside rounded box */}
+                <div className="mb-4 flex items-center gap-[9px] rounded-[12px] border-[0.5px] border-hub-border bg-hub-surface-raised px-[13px] py-[10px]">
+                    <Search className="h-[15px] w-[15px] shrink-0 text-hub-text-faint" />
+                    <input
+                        type="text"
+                        placeholder={`Search ${apps.length} apps…`}
+                        value={search}
+                        onChange={(e) => setSearch(e.target.value)}
+                        className="w-full bg-transparent text-[14px] text-hub-text placeholder:text-hub-text-faint/60 outline-none"
+                    />
+                </div>
 
                 {grouped.length > 0 ? (
-                    grouped.map((group, index) => (
+                    grouped.map((group) => (
                         <HubSectionCard
                             key={group.category}
                             title={group.category}
-                            subtitle={`${group.apps.length} tools available`}
+                            subtitle={`${group.apps.length} tools`}
                             className="mb-4"
                         >
                             <div className="grid grid-cols-4 gap-2.5">
@@ -105,24 +106,14 @@ function AppCatalog({ apps, categories }: Props) {
                                         onClick={() => recordLaunch(app.id)}
                                     />
                                 ))}
-                                {index === grouped.length - 1 && (
-                                    <div className="flex flex-col items-center gap-1.5 rounded-2xl p-1 opacity-50">
-                                        <div className="hub-muted-surface flex h-[52px] w-[52px] items-center justify-center rounded-[17px] text-sm shadow-[0_6px_16px_rgba(37,37,37,0.04)] dark:border-neutral-800 dark:bg-neutral-950">
-                                            ➕
-                                        </div>
-                                        <span className="text-center text-[10px] font-medium leading-tight text-[#5F5E5A]">
-                                            Add
-                                        </span>
-                                    </div>
-                                )}
                             </div>
                         </HubSectionCard>
                     ))
                 ) : (
-                    <HubSectionCard className="p-10 text-center">
+                    <div className="rounded-[14px] border-[0.5px] border-hub-border bg-hub-surface-raised p-10 text-center">
                         <p className="mb-1 text-base">🔎</p>
-                        <p className="text-sm text-[#888780]">No apps found.</p>
-                    </HubSectionCard>
+                        <p className="text-sm text-hub-text-faint">No apps found.</p>
+                    </div>
                 )}
             </div>
         </>

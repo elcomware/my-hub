@@ -14,9 +14,9 @@ type Props = {
 };
 
 const variantClasses: Record<Variant, string> = {
-    brand: 'bg-[#3A9828] text-white shadow-[0_14px_32px_rgba(58,152,40,0.22)]',
-    dark: 'bg-[#252525] text-white shadow-[0_14px_30px_rgba(37,37,37,0.18)]',
-    light: 'hub-surface text-[#2C2C2A]',
+    brand: 'bg-hub-primary text-white',
+    dark: 'bg-hub-text text-white',
+    light: 'hub-surface text-hub-text',
 };
 
 export function HubHeroCard({
@@ -33,19 +33,19 @@ export function HubHeroCard({
     return (
         <section
             className={cn(
-                'relative overflow-hidden rounded-[20px] p-4',
+                'relative overflow-hidden rounded-[20px] p-[18px]',
                 variantClasses[variant],
                 className,
             )}
         >
-            <div className="pointer-events-none absolute -bottom-5 -right-5 h-20 w-20 rounded-full bg-[rgba(255,255,255,0.10)]" />
-            <div className="pointer-events-none absolute -top-6 right-8 h-14 w-14 rounded-full bg-[rgba(255,255,255,0.06)]" />
+            <div className="pointer-events-none absolute -bottom-5 -right-5 h-20 w-20 rounded-full bg-white/[0.08]" />
+            <div className="pointer-events-none absolute -top-6 right-8 h-14 w-14 rounded-full bg-white/[0.05]" />
 
             {eyebrow && (
                 <p
                     className={cn(
-                        'mb-1 text-[10px] font-medium uppercase tracking-[0.16em]',
-                        isLight ? 'text-[#888780]' : 'text-white/65',
+                        'mb-1 text-[10px] font-medium uppercase tracking-[0.08em]',
+                        isLight ? 'text-hub-text-faint' : 'text-white/60',
                     )}
                 >
                     {eyebrow}
@@ -54,8 +54,8 @@ export function HubHeroCard({
 
             <h1
                 className={cn(
-                    'font-hub-serif text-[20px] font-semibold leading-[1.2]',
-                    isLight ? 'text-[#2C2C2A]' : 'text-white',
+                    'font-hub-serif text-[18px] font-semibold leading-[1.25]',
+                    isLight ? 'text-hub-text' : 'text-white',
                 )}
             >
                 {title}
@@ -65,7 +65,7 @@ export function HubHeroCard({
                 <p
                     className={cn(
                         'mt-2 text-[12px] leading-relaxed',
-                        isLight ? 'text-[#6E6B66]' : 'text-white/80',
+                        isLight ? 'text-hub-text-muted' : 'text-white/80',
                     )}
                 >
                     {description}

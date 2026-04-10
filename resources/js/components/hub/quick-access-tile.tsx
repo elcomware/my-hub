@@ -7,25 +7,18 @@ type Props = {
 };
 
 const tileBgColors = [
-    '#EBF4FD',
-    '#EBF8EF',
-    '#FEF9EC',
+    '#FAECE7',
+    '#E1F5EE',
+    '#FAEEDA',
     '#F0EFFE',
-    '#F9EEF2',
-    '#EBF7E6',
+    '#F5F2ED',
+    '#EBF4FD',
     '#FEF0EB',
     '#F0F4FF',
 ];
 
-const defaultTileBadges: Record<string, number> = {
-    Slack: 5,
-    Support: 3,
-    Email: 6,
-};
-
 export function QuickAccessTile({ app, onClick, badge }: Props) {
     const bgColor = tileBgColors[(app.id ?? 0) % tileBgColors.length];
-    const resolvedBadge = badge ?? defaultTileBadges[app.name];
 
     const handleClick = () => {
         onClick?.();
@@ -40,20 +33,20 @@ export function QuickAccessTile({ app, onClick, badge }: Props) {
     return (
         <button
             onClick={handleClick}
-            className="flex flex-col items-center gap-1.5 rounded-2xl p-1 outline-none transition-transform duration-150 hover:-translate-y-0.5"
+            className="flex flex-col items-center gap-1.5 rounded-2xl p-1 outline-none transition-transform duration-150 hover:-translate-y-0.5 active:scale-95"
         >
             <div
-                className="relative flex h-[52px] w-[52px] items-center justify-center rounded-[17px] border border-[#ECE4DA] text-xl shadow-[0_6px_16px_rgba(37,37,37,0.06)]"
+                className="relative flex h-[52px] w-[52px] items-center justify-center rounded-[17px] border-[0.5px] border-hub-border text-xl"
                 style={{ background: bgColor }}
             >
                 <span>{app.icon ?? '📱'}</span>
-                {resolvedBadge && resolvedBadge > 0 && (
-                    <span className="absolute -right-1 -top-1 flex h-[17px] min-w-[17px] items-center justify-center rounded-[9px] border-2 border-[#FBF8F4] bg-[#8B1A3C] px-0.5 text-[9px] font-bold text-white">
-                        {resolvedBadge}
+                {badge && badge > 0 && (
+                    <span className="absolute -right-1 -top-1 flex h-[16px] min-w-[16px] items-center justify-center rounded-full bg-hub-danger text-[8px] font-bold text-white ring-2 ring-hub-surface">
+                        {badge > 9 ? '9+' : badge}
                     </span>
                 )}
             </div>
-            <span className="text-center text-[10px] font-medium leading-tight text-[#5F5E5A]">
+            <span className="text-center text-[10px] font-medium leading-tight text-hub-text-muted">
                 {app.name}
             </span>
         </button>

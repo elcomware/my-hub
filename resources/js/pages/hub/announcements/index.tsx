@@ -2,7 +2,6 @@ import { Head, Link, router, usePage } from '@inertiajs/react';
 import { CheckCheck } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { AnnouncementCard } from '@/components/hub/announcement-card';
-import { HubHeroCard } from '@/components/hub/hub-hero-card';
 import { HubSectionCard } from '@/components/hub/hub-section-card';
 import HubLayout from '@/layouts/hub-layout';
 import type { Announcement } from '@/types';
@@ -17,7 +16,7 @@ type Props = {
     unreadCount: number;
 };
 
-const filterChips = ['All', 'Urgent', 'Event', 'Info'] as const;
+const filterChips = ['All', 'Urgent', 'Event', 'Info', 'Operational'] as const;
 
 function AnnouncementsFeed({ announcements, unreadCount }: Props) {
     const { currentTeam } = usePage().props;
@@ -45,75 +44,78 @@ function AnnouncementsFeed({ announcements, unreadCount }: Props) {
     return (
         <>
             <Head title="Updates" />
-            <div className="px-3.5 py-3.5">
-                <HubHeroCard
-                    eyebrow="Updates feed"
-                    title="Stay on top of what changed"
-                    description={
-                        unreadCount > 0
-                            ? `${unreadCount} unread updates need attention.`
-                            : 'You are all caught up.'
-                    }
-                    meta={
-                        unreadCount > 0 ? (
+            <div className="px-4 py-4">
+                {/* Header area */}
+                <div className="mb-4">
+                    <p className="font-hub-serif text-[20px] font-semibold text-hub-text">
+                        Updates
+                    </p>
+                    {unreadCount > 0 && (
+                        <div className="mt-2 flex items-center justify-between">
+                            <p className="text-[12px] text-hub-text-muted">
+                                {unreadCount} unread
+                            </p>
                             <button
                                 onClick={markAllRead}
-                                className="flex items-center gap-1 rounded-full bg-white/14 px-3 py-1.5 text-[11px] font-semibold text-white"
+                                className="flex items-center gap-1 rounded-full bg-hub-surface px-3 py-1.5 text-[11px] font-medium text-hub-text-muted transition-colors hover:bg-hub-border"
                             >
                                 <CheckCheck className="h-3.5 w-3.5" />
-                                Mark all
+                                Mark all read
                             </button>
-                        ) : null
-                    }
-                    className="mb-3.5"
-                />
-
-                <div className="mb-3 flex flex-wrap gap-2">
-                    {filterChips.map((chip) => (
-                        <button
-                            key={chip}
-                            onClick={() => setActiveFilter(chip)}
-                            className={`rounded-full border px-3 py-1.5 text-[11px] font-semibold transition-colors ${
-                                activeFilter === chip
-                                    ? 'border-[#3A9828] bg-[#3A9828] text-white'
-                                    : 'border-[#D9D2C8] bg-[#F5F2ED] text-[#5F5E5A] hover:border-[#BEB7AB] dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-400'
-                            }`}
-                        >
-                            {chip}
-                        </button>
-                    ))}
+                        </div>
+                    )}
                 </div>
 
-                <HubSectionCard>
-                    <div className="space-y-2.5">
-                        {filtered.length > 0 ? (
-                            filtered.map((a) => (
-                                <AnnouncementCard
-                                    key={a.id}
-                                    announcement={a}
-                                    teamSlug={teamSlug}
-                                />
-                            ))
-                        ) : (
-                            <div className="rounded-[18px] border border-[#E8E1D8] bg-white p-8 text-center shadow-[0_6px_16px_rgba(37,37,37,0.04)] dark:border-neutral-800 dark:bg-neutral-900">
-                                <p className="text-sm text-[#888780]">
-                                    No announcements found.
-                                </p>
-                            </div>
-                        )}
-                    </div>
-                </HubSectionCard>
+                {/* Filter chips — Sema horizontal scroll style */}
+                <div className="-mx-4 mb-4 flex gap-[7px] overflow-x-auto px-4 pb-1">
+                    {filterChips.map((chip) => {
+                        const active = activeFilter === chip;
+                        return (
+                            <button
+                                key={chip}
+                                onClick={() => setActiveFilter(chip)}
+                                className={`shrink-0 whitespace-nowrap rounded-full px-[14px] py-[5px] text-[12px] font-medium transition-colors ${
+                                    active
+                                        ? 'bg-hub-primary text-white'
+                                        : 'border-[0.5px] border-hub-border bg-hub-surface text-hub-text-muted'
+                                }`}
+                            >
+                                {chip}
+                            </button>
+                        );
+                    })}
+                </div>
 
+                {/* Announcements list */}
+                <div className="flex flex-col gap-[9px]">
+                    {filtered.length > 0 ? (
+                        filtered.map((a) => (
+                            <AnnouncementCard
+                                key={a.id}
+                                announcement={a}
+                                teamSlug={teamSlug}
+                            />
+                        ))
+                    ) : (
+                        <div className="rounded-[14px] border-[0.5px] border-hub-border bg-hub-surface-raised p-8 text-center">
+                            <p className="text-sm text-hub-text-faint">
+                                No announcements found.
+                            </p>
+                        </div>
+                    )}
+                </div>
+
+                {/* Pagination */}
                 {announcements.last_page > 1 && (
                     <div className="mt-4 flex justify-center gap-1">
                         {announcements.links.map((link, i) => (
                             <Link
                                 key={i}
                                 href={link.url ?? '#'}
-                                className={`rounded-full px-3 py-1.5 text-[11px] font-medium ${
+                                className={`rounded-full px-3 py-1.5 text-[11px] font-medium transition-colors ${
                                     link.active
-                                        ? 'bg-[#252525] text-white'
-                                        : 'bg-white text-[#888780] hover:bg-[#F5F2ED]'
+                                        ? 'bg-hub-primary text-white'
+                                        : 'bg-hub-surface-raised text-hub-text-faint hover:bg-hub-surface'
                                 } ${!link.url ? 'pointer-events-none opacity-50' : ''}`}
                                 dangerouslySetInnerHTML={{
                                     __html: link.label,

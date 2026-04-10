@@ -21,27 +21,22 @@ export function HubSectionCard({
     children,
 }: Props) {
     return (
-        <section
-            className={cn(
-                'hub-surface rounded-[18px] p-3 dark:border-neutral-800 dark:bg-neutral-900 dark:shadow-none',
-                className,
-            )}
-        >
+        <section className={cn('', className)}>
             {(title || subtitle || action) && (
                 <div
                     className={cn(
-                        'mb-3 flex items-start justify-between gap-3',
+                        'mb-[10px] flex items-center justify-between',
                         headerClassName,
                     )}
                 >
                     <div className="min-w-0">
                         {title && (
-                            <h2 className="text-[11px] font-bold uppercase tracking-widest text-[#5F5E5A] dark:text-white">
+                            <h2 className="text-[11px] font-medium uppercase tracking-[0.06em] text-hub-text-faint">
                                 {title}
                             </h2>
                         )}
                         {subtitle && (
-                            <p className="mt-1 text-[11px] text-[#888780] dark:text-neutral-400">
+                            <p className="mt-0.5 text-[11px] text-hub-text-faint">
                                 {subtitle}
                             </p>
                         )}
