@@ -2,11 +2,14 @@ import { Head, router, usePage } from '@inertiajs/react';
 import { Settings } from 'lucide-react';
 import HubLayout from '@/layouts/hub-layout';
 
+type NotifPref = { level: string; enabled: boolean };
+
 type Props = {
     connectedAppsCount: number;
+    notificationPreferences: Record<string, NotifPref>;
 };
 
-function ProfileIndex({ connectedAppsCount }: Props) {
+function ProfileIndex({ connectedAppsCount, notificationPreferences }: Props) {
     const { auth, currentTeam } = usePage().props;
     const user = auth.user;
 
@@ -19,6 +22,25 @@ function ProfileIndex({ connectedAppsCount }: Props) {
 
     const teamRole = currentTeam?.role ?? 'member';
     const teamName = currentTeam?.name ?? '';
+    const teamSlug = currentTeam?.slug ?? '';
+
+    const webPref = notificationPreferences.web ?? { level: 'all', enabled: true };
+    const notifsEnabled = webPref.enabled;
+    const isUrgentOnly = webPref.level === 'urgent';
+
+    const toggleNotifications = () => {
+        router.post(`/${teamSlug}/profile/notification-preferences`, {
+            channel: 'web',
+            enabled: !notifsEnabled,
+        }, { preserveScroll: true });
+    };
+
+    const toggleUrgentOnly = () => {
+        router.post(`/${teamSlug}/profile/notification-preferences`, {
+            channel: 'web',
+            level: isUrgentOnly ? 'all' : 'urgent',
+        }, { preserveScroll: true });
+    };
 
     const handleSignOut = () => {
         router.post('/logout');
@@ -69,7 +91,7 @@ function ProfileIndex({ connectedAppsCount }: Props) {
                     </div>
                     <div className="rounded-[12px] border-[0.5px] border-hub-border bg-hub-primary/10 p-[11px] text-center">
                         <p className="font-hub-serif text-[22px] font-semibold text-hub-primary">
-                            on
+                            {notifsEnabled ? 'on' : 'off'}
                         </p>
                         <p className="text-[10px] text-hub-text-faint">notifications</p>
                     </div>
@@ -80,18 +102,18 @@ function ProfileIndex({ connectedAppsCount }: Props) {
                     Notifications
                 </p>
                 <div className="mb-4 overflow-hidden rounded-[14px] border-[0.5px] border-hub-border bg-hub-surface-raised">
-                    <div className="flex items-center justify-between border-b border-hub-border/50 px-[14px] py-[13px]">
+                    <button onClick={toggleNotifications} className="flex w-full items-center justify-between border-b border-hub-border/50 px-[14px] py-[13px]">
                         <p className="text-[14px] text-hub-text">All notifications</p>
-                        <div className="relative h-[20px] w-[36px] rounded-[10px] bg-hub-primary">
-                            <div className="absolute right-[2px] top-[2px] h-4 w-4 rounded-full bg-white" />
+                        <div className={`relative h-[20px] w-[36px] rounded-[10px] transition-colors ${notifsEnabled ? 'bg-hub-primary' : 'bg-hub-border'}`}>
+                            <div className={`absolute top-[2px] h-4 w-4 rounded-full bg-white transition-all ${notifsEnabled ? 'right-[2px]' : 'left-[2px]'}`} />
                         </div>
-                    </div>
-                    <div className="flex items-center justify-between px-[14px] py-[13px]">
+                    </button>
+                    <button onClick={toggleUrgentOnly} className="flex w-full items-center justify-between px-[14px] py-[13px]">
                         <p className="text-[14px] text-hub-text">Urgent only</p>
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-hub-text-faint">
-                            <polyline points="9 18 15 12 9 6" />
-                        </svg>
-                    </div>
+                        <div className={`relative h-[20px] w-[36px] rounded-[10px] transition-colors ${isUrgentOnly ? 'bg-hub-primary' : 'bg-hub-border'}`}>
+                            <div className={`absolute top-[2px] h-4 w-4 rounded-full bg-white transition-all ${isUrgentOnly ? 'right-[2px]' : 'left-[2px]'}`} />
+                        </div>
+                    </button>
                 </div>
 
                 <p className="mb-2 text-[11px] font-medium uppercase tracking-[0.06em] text-hub-text-faint">

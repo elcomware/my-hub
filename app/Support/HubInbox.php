@@ -7,79 +7,54 @@ use App\Models\Team;
 class HubInbox
 {
     /**
-     * Build inbox items that mirror the branded mockup.
+     * Retrieve inbox items for a team from connected integrations.
+     *
+     * Currently returns sample items seeded from the team's app catalog.
+     * When real integration adapters are built (US-024), each connected
+     * provider will contribute its own items through a common contract.
      *
      * @return array<int, array<string, int|string>>
      */
     public static function itemsFor(Team $team): array
     {
-        $availableApps = $team->apps()
-            ->pluck('name')
-            ->map(fn (string $name) => strtolower($name))
-            ->all();
+        $apps = $team->apps()
+            ->select(['id', 'name', 'icon'])
+            ->limit(6)
+            ->get();
 
-        $catalog = [
-            [
-                'id' => 1,
-                'app' => 'Slack',
-                'icon' => '💬',
-                'iconBg' => '#EBF4FD',
-                'from' => 'Slack — #operations',
-                'time' => '9:12',
-                'subject' => 'Jordan: “Can we approve the launch checklist today?”',
-                'preview' => '+4 messages in this channel',
-                'unreadCount' => 5,
-            ],
-            [
-                'id' => 2,
-                'app' => 'Email',
-                'icon' => '📧',
-                'iconBg' => '#FEF9EC',
-                'from' => 'Email',
-                'time' => '8:55',
-                'subject' => 'Client onboarding pack — updated checklist',
-                'preview' => 'Please review the revised launch requirements…',
-                'unreadCount' => 6,
-            ],
-            [
-                'id' => 3,
-                'app' => 'Support',
-                'icon' => '📞',
-                'iconBg' => '#EBF8EF',
-                'from' => 'Support Desk',
-                'time' => '8:40',
-                'subject' => 'Priority ticket escalated for finance workspace',
-                'preview' => '+2 updates',
-                'unreadCount' => 3,
-            ],
-            [
-                'id' => 4,
-                'app' => 'Calendar',
-                'icon' => '📅',
-                'iconBg' => '#F0EFFE',
-                'from' => 'Calendar',
-                'time' => 'Today',
-                'subject' => 'Reminder: leadership sync at 14:00',
-                'preview' => 'Boardroom B12 · 1h · 8 attendees',
-                'unreadCount' => 0,
-            ],
-        ];
-
-        $items = collect($catalog)
-            ->filter(fn (array $item) => in_array(strtolower($item['app']), $availableApps, true))
-            ->map(fn (array $item) => collect($item)->except('app')->all())
-            ->values()
-            ->all();
-
-        if ($items !== []) {
-            return $items;
+        if ($apps->isEmpty()) {
+            return [];
         }
 
-        return collect($catalog)
-            ->map(fn (array $item) => collect($item)->except('app')->all())
-            ->all();
+        $templates = [
+            ['subject' => 'New activity in %s', 'preview' => 'You have updates waiting for review.'],
+            ['subject' => 'Reminder from %s', 'preview' => 'Check your pending tasks before end of day.'],
+            ['subject' => 'Update from %s', 'preview' => 'Recent changes require your attention.'],
+            ['subject' => '%s - action needed', 'preview' => 'An item is waiting for your approval.'],
+            ['subject' => 'Weekly digest from %s', 'preview' => 'Here is what happened this week.'],
+            ['subject' => 'Alert from %s', 'preview' => 'A new notification was triggered.'],
+        ];
+
+        $defaultBgs = ['#EBF4FD', '#FEF9EC', '#EBF8EF', '#F0EFFE', '#FFF0F0', '#F5F2ED'];
+
+        return $apps->values()->map(function ($app, $i) use ($templates, $defaultBgs) {
+            $tpl = $templates[$i % count($templates)];
+            return [
+                'id' => $app->id,
+                'icon' => $app->icon ?: "\u{1F4E6}",
+                'iconBg' => $defaultBgs[$i % count($defaultBgs)],
+                'from' => $app->name,
+                'time' => now()->subMinutes(rand(5, 480))->format('H:i'),
+                'subject' => sprintf($tpl['subject'], $app->name),
+                'preview' => $tpl['preview'],
+                'unreadCount' => rand(0, 5),
+            ];
+        })->all();
     }
 
+    /**
+     * Get total unread count across all inbox sources.
+     */
     public static function unreadCountFor(Team $team): int
     {
         return collect(static::itemsFor($team))

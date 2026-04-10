@@ -19,11 +19,28 @@ class AnnouncementFeedController extends Controller
     {
         $user = $request->user();
 
-        $announcements = $currentTeam->announcements()
+        $query = $currentTeam->announcements()
             ->published()
             ->with('author:id,name')
-            ->latest('published_at')
+            ->latest('published_at');
+
+        // Tag filter
+        if ($request->filled('tag') && $request->input('tag') !== 'all') {
+            $query->where('tag', $request->input('tag'));
+        }
+
+        // Search filter
+        if ($request->filled('search')) {
+            $search = $request->input('search');
+            $query->where(function ($q) use ($search) {
+                $q->where('title', 'like', "%{$search}%")
+                  ->orWhere('body', 'like', "%{$search}%");
+            });
+        }
+
+        $announcements = $query
             ->paginate(15)
+            ->withQueryString()
             ->through(fn ($a) => [
                 'id' => $a->id,
                 'title' => $a->title,
@@ -42,6 +59,10 @@ class AnnouncementFeedController extends Controller
         return Inertia::render('hub/announcements/index', [
             'announcements' => $announcements,
             'unreadCount' => $unreadCount,
+            'filters' => [
+                'tag' => $request->input('tag', 'all'),
+                'search' => $request->input('search', ''),
+            ],
         ]);
     }
 

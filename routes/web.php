@@ -7,6 +7,7 @@ use App\Http\Controllers\Hub\AnnouncementFeedController;
 use App\Http\Controllers\Hub\AppCatalogController;
 use App\Http\Controllers\Hub\HubController;
 use App\Http\Controllers\Hub\InboxController;
+use App\Http\Controllers\Hub\OnboardingController;
 use App\Http\Controllers\Hub\ProfileController;
 use App\Http\Controllers\Teams\TeamInvitationController;
 use App\Http\Middleware\EnsureTeamMembership;
@@ -24,6 +25,8 @@ Route::prefix('{current_team}')
 
         // Hub routes
         Route::get('hub', [HubController::class, 'index'])->name('hub.index');
+        Route::get('onboarding', [OnboardingController::class, 'index'])->name('hub.onboarding');
+        Route::post('onboarding/complete', [OnboardingController::class, 'complete'])->name('hub.onboarding.complete');
         Route::get('apps', [AppCatalogController::class, 'index'])->name('hub.apps.index');
         Route::post('apps/{app}/favourite', [AppCatalogController::class, 'toggleFavourite'])->name('hub.apps.favourite');
         Route::post('apps/{app}/launch', [AppCatalogController::class, 'launch'])->name('hub.apps.launch');
@@ -32,6 +35,7 @@ Route::prefix('{current_team}')
         Route::post('announcements/mark-all-read', [AnnouncementFeedController::class, 'markAllRead'])->name('hub.announcements.markAllRead');
         Route::get('inbox', [InboxController::class, 'index'])->name('hub.inbox.index');
         Route::get('profile', [ProfileController::class, 'index'])->name('hub.profile.index');
+        Route::post('profile/notification-preferences', [ProfileController::class, 'updateNotificationPreferences'])->name('hub.profile.notifications');
 
         // Admin routes (require admin role)
         Route::prefix('admin')

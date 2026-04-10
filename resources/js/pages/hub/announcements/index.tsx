@@ -1,6 +1,6 @@
 import { Head, Link, router, usePage } from '@inertiajs/react';
-import { CheckCheck } from 'lucide-react';
-import { useMemo, useState } from 'react';
+import { CheckCheck, Search } from 'lucide-react';
+import { useCallback, useRef, useState } from 'react';
 import { AnnouncementCard } from '@/components/hub/announcement-card';
 import { HubSectionCard } from '@/components/hub/hub-section-card';
 import HubLayout from '@/layouts/hub-layout';
@@ -14,24 +14,39 @@ type Props = {
         last_page: number;
     };
     unreadCount: number;
+    filters: {
+        tag: string;
+        search: string;
+    };
 };
 
-const filterChips = ['All', 'Urgent', 'Event', 'Info', 'Operational'] as const;
+const filterChips = ['all', 'urgent', 'event', 'info', 'operational'] as const;
+const chipLabels: Record<string, string> = { all: 'All', urgent: 'Urgent', event: 'Event', info: 'Info', operational: 'Operational' };
 
-function AnnouncementsFeed({ announcements, unreadCount }: Props) {
+function AnnouncementsFeed({ announcements, unreadCount, filters }: Props) {
     const { currentTeam } = usePage().props;
     const teamSlug = currentTeam?.slug ?? '';
-    const [activeFilter, setActiveFilter] = useState<string>('All');
+    const [search, setSearch] = useState(filters.search);
+    const debounceRef = useRef<ReturnType<typeof setTimeout>>();
 
-    const filtered = useMemo(
-        () =>
-            activeFilter === 'All'
-                ? announcements.data
-                : announcements.data.filter(
-                      (a) => a.tag.toLowerCase() === activeFilter.toLowerCase(),
-                  ),
-        [announcements.data, activeFilter],
+    const applyFilters = useCallback(
+        (overrides: Partial<typeof filters>) => {
+            const params = { ...filters, ...overrides };
+            router.get(`/${teamSlug}/announcements`, {
+                ...(params.tag !== 'all' ? { tag: params.tag } : {}),
+                ...(params.search ? { search: params.search } : {}),
+            }, { preserveState: true, replace: true });
+        },
+        [filters, teamSlug],
     );
+
+    const onSearchChange = (value: string) => {
+        setSearch(value);
+        clearTimeout(debounceRef.current);
+        debounceRef.current = setTimeout(() => {
+            applyFilters({ search: value });
+        }, 300);
+    };
 
     const markAllRead = () => {
         router.post(
@@ -66,21 +81,33 @@ function AnnouncementsFeed({ announcements, unreadCount }: Props) {
                     )}
                 </div>
 
+                {/* Search */}
+                <div className="relative mb-3">
+                    <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-hub-text-faint" strokeWidth={1.5} />
+                    <input
+                        type="text"
+                        value={search}
+                        onChange={(e) => onSearchChange(e.target.value)}
+                        placeholder="Search updates…"
+                        className="w-full rounded-[12px] border-[0.5px] border-hub-border bg-hub-surface-raised py-[9px] pl-9 pr-3 text-[13px] text-hub-text placeholder:text-hub-text-faint focus:border-hub-primary focus:outline-none"
+                    />
+                </div>
+
                 {/* Filter chips — Sema horizontal scroll style */}
                 <div className="-mx-4 mb-4 flex gap-[7px] overflow-x-auto px-4 pb-1">
                     {filterChips.map((chip) => {
-                        const active = activeFilter === chip;
+                        const active = filters.tag === chip;
                         return (
                             <button
                                 key={chip}
-                                onClick={() => setActiveFilter(chip)}
+                                onClick={() => applyFilters({ tag: chip })}
                                 className={`shrink-0 whitespace-nowrap rounded-full px-[14px] py-[5px] text-[12px] font-medium transition-colors ${
                                     active
                                         ? 'bg-hub-primary text-white'
                                         : 'border-[0.5px] border-hub-border bg-hub-surface text-hub-text-muted'
                                 }`}
                             >
-                                {chip}
+                                {chipLabels[chip]}
                             </button>
                         );
                     })}
@@ -88,8 +115,8 @@ function AnnouncementsFeed({ announcements, unreadCount }: Props) {
 
                 {/* Announcements list */}
                 <div className="flex flex-col gap-[9px]">
-                    {filtered.length > 0 ? (
-                        filtered.map((a) => (
+                    {announcements.data.length > 0 ? (
+                        announcements.data.map((a) => (
                             <AnnouncementCard
                                 key={a.id}
                                 announcement={a}
