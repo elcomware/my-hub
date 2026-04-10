@@ -101,11 +101,10 @@ function AnnouncementsFeed({ announcements, unreadCount, filters }: Props) {
                             <button
                                 key={chip}
                                 onClick={() => applyFilters({ tag: chip })}
-                                className={`shrink-0 whitespace-nowrap rounded-full px-[14px] py-[5px] text-[12px] font-medium transition-colors ${
-                                    active
+                                className={`shrink-0 whitespace-nowrap rounded-full px-[14px] py-[5px] text-[12px] font-medium transition-colors ${active
                                         ? 'bg-hub-primary text-white'
                                         : 'border-[0.5px] border-hub-border bg-hub-surface text-hub-text-muted'
-                                }`}
+                                    }`}
                             >
                                 {chipLabels[chip]}
                             </button>
@@ -139,11 +138,10 @@ function AnnouncementsFeed({ announcements, unreadCount, filters }: Props) {
                             <Link
                                 key={i}
                                 href={link.url ?? '#'}
-                                className={`rounded-full px-3 py-1.5 text-[11px] font-medium transition-colors ${
-                                    link.active
+                                className={`rounded-full px-3 py-1.5 text-[11px] font-medium transition-colors ${link.active
                                         ? 'bg-hub-primary text-white'
                                         : 'bg-hub-surface-raised text-hub-text-faint hover:bg-hub-surface'
-                                } ${!link.url ? 'pointer-events-none opacity-50' : ''}`}
+                                    } ${!link.url ? 'pointer-events-none opacity-50' : ''}`}
                                 dangerouslySetInnerHTML={{
                                     __html: link.label,
                                 }}

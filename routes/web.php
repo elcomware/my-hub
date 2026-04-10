@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\Admin\AnalyticsController;
 use App\Http\Controllers\Admin\AnnouncementManagementController;
 use App\Http\Controllers\Admin\AppManagementController;
 use App\Http\Controllers\Admin\BrandingController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Hub\AnnouncementFeedController;
 use App\Http\Controllers\Hub\AppCatalogController;
 use App\Http\Controllers\Hub\HubController;
@@ -13,6 +15,7 @@ use App\Http\Controllers\Teams\TeamInvitationController;
 use App\Http\Middleware\EnsureTeamMembership;
 use Illuminate\Support\Facades\Route;
 use Laravel\Fortify\Features;
+use App\Http\Controllers\PushController;
 
 Route::inertia('/', 'welcome', [
     'canRegister' => Features::enabled(Features::registration()),
@@ -21,7 +24,7 @@ Route::inertia('/', 'welcome', [
 Route::prefix('{current_team}')
     ->middleware(['auth', 'verified', EnsureTeamMembership::class])
     ->group(function () {
-        Route::inertia('dashboard', 'dashboard')->name('dashboard');
+        Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
         // Hub routes
         Route::get('hub', [HubController::class, 'index'])->name('hub.index');
@@ -53,11 +56,17 @@ Route::prefix('{current_team}')
 
                 Route::get('branding', [BrandingController::class, 'edit'])->name('admin.branding.edit');
                 Route::patch('branding', [BrandingController::class, 'update'])->name('admin.branding.update');
+
+                Route::get('analytics', [AnalyticsController::class, 'index'])->name('admin.analytics.index');
             });
     });
 
 Route::middleware(['auth'])->group(function () {
     Route::get('invitations/{invitation}/accept', [TeamInvitationController::class, 'accept'])->name('invitations.accept');
+    Route::post('push/register', [PushController::class, 'register'])->name('push.register');
+    Route::post('push/unregister', [PushController::class, 'unregister'])->name('push.unregister');
 });
 
 require __DIR__.'/settings.php';
+require __DIR__.'/platform.php';
+require __DIR__.'/oauth.php';

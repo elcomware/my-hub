@@ -35,6 +35,7 @@ class ProfileController extends Controller
         return Inertia::render('hub/profile/index', [
             'connectedAppsCount' => $currentTeam->apps()->count(),
             'notificationPreferences' => $defaults,
+            'connectedProviders' => $user->connectedProviders(),
         ]);
     }
 

@@ -14,10 +14,39 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 
-#[Fillable(['name', 'email', 'password', 'current_team_id', 'onboarding_completed_at'])]
+#[Fillable(['name', 'email', 'password', 'current_team_id', 'onboarding_completed_at', 'is_platform_admin'])]
 #[Hidden(['password', 'two_factor_secret', 'two_factor_recovery_codes', 'remember_token'])]
 class User extends Authenticatable
 {
+    /**
+     * Get the user's device tokens for push notifications.
+     */
+    public function deviceTokens()
+    {
+        return $this->hasMany(DeviceToken::class);
+    }
+    /**
+     * Return a list of connected OAuth providers for this user.
+     *
+     * @return array<string>
+     */
+    public function connectedProviders(): array
+    {
+        $providers = [];
+        if ($this->provider && $this->provider_id) {
+            $providers[] = $this->provider;
+        }
+        // Extend here for multi-provider support in future
+        return $providers;
+    }
+
+    /**
+     * Is the user connected to a given provider?
+     */
+    public function isConnectedTo(string $provider): bool
+    {
+        return $this->provider === $provider && !empty($this->provider_id);
+    }
     /** @use HasFactory<UserFactory> */
     use HasFactory, HasTeams, Notifiable, TwoFactorAuthenticatable;
 
@@ -74,6 +103,7 @@ class User extends Authenticatable
             'password' => 'hashed',
             'two_factor_confirmed_at' => 'datetime',
             'onboarding_completed_at' => 'datetime',
+            'is_platform_admin' => 'boolean',
         ];
     }
 }

@@ -30,9 +30,11 @@
             }
         </style>
 
+
         <link rel="icon" href="/favicon.ico" sizes="any">
         <link rel="icon" href="/favicon.svg" type="image/svg+xml">
         <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+        <link rel="manifest" href="/manifest.json">
 
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
@@ -42,6 +44,18 @@
         <x-inertia::head>
             <title>{{ config('app.name', 'LumaHub') }}</title>
         </x-inertia::head>
+        <script>
+            // Register service worker for PWA and push notifications (fallback for browsers not supporting module imports)
+            if ('serviceWorker' in navigator) {
+                window.addEventListener('load', function() {
+                    navigator.serviceWorker.register('/service-worker.js').then(function(registration) {
+                        console.log('ServiceWorker registered (blade):', registration);
+                    }, function(err) {
+                        console.log('ServiceWorker registration failed:', err);
+                    });
+                });
+            }
+        </script>
     </head>
     <body class="font-sans antialiased">
         <x-inertia::app />

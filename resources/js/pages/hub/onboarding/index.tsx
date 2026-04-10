@@ -39,18 +39,16 @@ function OnboardingIndex({ teamName, appCount, steps }: Props) {
                             className="flex items-center gap-3 rounded-[14px] border-[0.5px] border-hub-border bg-hub-surface-raised px-4 py-[14px]"
                         >
                             <div
-                                className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full ${
-                                    step.done
+                                className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full ${step.done
                                         ? 'bg-hub-success text-white'
                                         : 'border-[1.5px] border-hub-border bg-hub-surface'
-                                }`}
+                                    }`}
                             >
                                 {step.done && <Check className="h-3.5 w-3.5" strokeWidth={2.5} />}
                             </div>
                             <span
-                                className={`text-[14px] ${
-                                    step.done ? 'text-hub-text-muted line-through' : 'font-medium text-hub-text'
-                                }`}
+                                className={`text-[14px] ${step.done ? 'text-hub-text-muted line-through' : 'font-medium text-hub-text'
+                                    }`}
                             >
                                 {step.title}
                             </span>
