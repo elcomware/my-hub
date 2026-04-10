@@ -1,0 +1,840 @@
+
+<style>
+@import url('https://unpkg.com/@fontsource-variable/fraunces/index.css');
+@import url('https://unpkg.com/@fontsource/dm-sans/400.css');
+@import url('https://unpkg.com/@fontsource/dm-sans/500.css');
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+.stage{font-family:'DM Sans',system-ui,sans-serif;display:flex;flex-direction:column;align-items:center;gap:14px;padding:20px 16px 24px;background:var(--color-background-secondary)}
+.phone{width:375px;height:720px;background:#FBF8F4;border-radius:48px;border:1.5px solid #C0BEB4;overflow:hidden;display:flex;flex-direction:column;flex-shrink:0;position:relative}
+.sbar{flex-shrink:0;display:flex;align-items:center;justify-content:space-between;padding:12px 22px 4px;background:#FBF8F4;font-size:12px;font-weight:500;color:#2C2C2A}
+.sbar-r{display:flex;align-items:center;gap:5px}
+.sw{flex:1;position:relative;overflow:hidden}
+.scn{position:absolute;inset:0;display:flex;flex-direction:column;background:#FBF8F4;opacity:0;pointer-events:none;transition:opacity .2s ease}
+.scn.on{opacity:1;pointer-events:all}
+.sc{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch}
+.sc::-webkit-scrollbar{display:none}
+.bnav{flex-shrink:0;display:flex;align-items:flex-end;justify-content:space-around;background:#fff;border-top:.5px solid #E8E6E0;padding:6px 4px 18px}
+.bni{display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;padding:2px 8px;flex:1}
+.bni-l{font-size:10px;color:#888780}
+.bni.on .bni-l{color:#D85A30}
+.bfab-wrap{display:flex;flex-direction:column;align-items:center}
+.bfab{width:52px;height:52px;background:#D85A30;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;margin-top:-20px;border:3px solid #fff;flex-shrink:0}
+.card{background:#fff;border-radius:14px;border:.5px solid #E8E6E0}
+.bdg{display:inline-flex;align-items:center;gap:4px;padding:2px 9px 3px;border-radius:100px;font-size:11px;font-weight:500}
+.sheader{flex-shrink:0;display:flex;align-items:center;gap:10px;padding:11px 16px;background:#FBF8F4;border-bottom:.5px solid #E8E6E0}
+.back{width:32px;height:32px;background:#F0EDE8;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0}
+.pills{display:flex;gap:5px;flex-wrap:wrap;justify-content:center;max-width:400px}
+.pill{font-size:11px;padding:5px 12px;border-radius:100px;border:.5px solid #C0BEB4;background:#FBF8F4;color:#5F5E5A;cursor:pointer;font-family:inherit}
+.pill.on{background:#D85A30;color:#fff;border-color:#D85A30}
+.tog{width:36px;height:20px;border-radius:10px;position:relative;cursor:pointer;flex-shrink:0;transition:background .2s}
+.tog-k{width:16px;height:16px;background:#fff;border-radius:50%;position:absolute;top:2px;transition:left .2s}
+@keyframes pG{0%,100%{opacity:1}50%{opacity:.35}}
+@keyframes rD{0%,100%{opacity:.2;transform:scale(.65)}50%{opacity:1;transform:scale(1)}}
+@keyframes wB{0%,100%{transform:scaleY(.18)}50%{transform:scaleY(1)}}
+@keyframes rO{0%{transform:scale(1);opacity:.45}100%{transform:scale(2.2);opacity:0}}
+</style>
+
+<div class="stage">
+<p style="font-size:11px;color:var(--color-text-secondary);text-align:center">10 screens · tap cards, nav items & buttons to explore</p>
+
+<div class="phone">
+  <div class="sbar">
+    <span>9:41</span>
+    <div class="sbar-r">
+      <svg width="17" height="11" viewBox="0 0 17 11"><rect x="0" y="7" width="3" height="4" rx=".5" fill="#2C2C2A"/><rect x="4.5" y="4.5" width="3" height="6.5" rx=".5" fill="#2C2C2A"/><rect x="9" y="2" width="3" height="9" rx=".5" fill="#2C2C2A"/><rect x="13.5" y="0" width="3" height="11" rx=".5" fill="#2C2C2A"/></svg>
+      <svg width="15" height="11" viewBox="0 0 15 11" fill="none"><path d="M1 4C3.7 1.6 11.3 1.6 14 4" stroke="#2C2C2A" stroke-width="1.4" stroke-linecap="round"/><path d="M3 6.5C4.8 5 10.2 5 12 6.5" stroke="#2C2C2A" stroke-width="1.4" stroke-linecap="round"/><circle cx="7.5" cy="10" r=".9" fill="#2C2C2A"/></svg>
+      <svg width="23" height="12" viewBox="0 0 23 12"><rect x=".5" y=".5" width="19" height="11" rx="2.5" stroke="#2C2C2A"/><rect x="2" y="2" width="14" height="8" rx="1.5" fill="#2C2C2A"/><path d="M21 4v4" stroke="#2C2C2A" stroke-width="1.4" stroke-linecap="round"/></svg>
+    </div>
+  </div>
+
+  <div class="sw">
+
+    <!-- HOME -->
+    <div class="scn on" id="s-home">
+      <div class="sc" style="padding:16px">
+        <div style="padding:4px 0 14px">
+          <p style="font-size:12px;color:#888780;margin-bottom:1px">Good morning</p>
+          <p style="font-family:'Fraunces Variable',Georgia,serif;font-size:27px;font-weight:600;color:#2C2C2A;line-height:1.2;margin-bottom:8px">Ama Asante</p>
+          <div style="display:flex;align-items:center;gap:6px">
+            <span style="display:inline-block;width:7px;height:7px;background:#1D9E75;border-radius:50%;animation:pG 2s ease-in-out infinite"></span>
+            <span style="font-size:12px;color:#1D9E75;font-weight:500">4 specialists online</span>
+            <span style="color:#D3D1C7;font-size:13px">·</span>
+            <span style="font-size:12px;color:#5F5E5A">Lomé, Togo</span>
+          </div>
+        </div>
+        <div style="background:#D85A30;border-radius:20px;padding:18px;margin-bottom:16px;cursor:pointer" onclick="go('record')">
+          <p style="font-size:10px;font-weight:500;color:rgba(255,255,255,.6);letter-spacing:.08em;margin-bottom:4px">SEMA · SPEAK. SOMEONE KNOWS.</p>
+          <p style="font-family:'Fraunces Variable',Georgia,serif;font-size:18px;font-weight:600;color:#fff;margin-bottom:14px">What would you like to ask today?</p>
+          <div style="display:flex;gap:8px">
+            <div style="flex:1;background:rgba(255,255,255,.18);border-radius:10px;padding:9px;text-align:center;font-size:12px;color:#fff;font-weight:500">Voice</div>
+            <div style="flex:1;background:rgba(255,255,255,.18);border-radius:10px;padding:9px;text-align:center;font-size:12px;color:#fff;font-weight:500">Type</div>
+            <div style="flex:1;background:rgba(255,255,255,.18);border-radius:10px;padding:9px;text-align:center;font-size:12px;color:#fff;font-weight:500">Photo</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+          <p style="font-size:11px;font-weight:500;color:#888780;text-transform:uppercase;letter-spacing:.06em">Your questions</p>
+          <p style="font-size:12px;color:#D85A30;font-weight:500;cursor:pointer" onclick="go('library')">See all</p>
+        </div>
+        <div class="card" style="padding:13px;margin-bottom:9px;cursor:pointer" onclick="go('answer')">
+          <div style="display:flex;gap:10px">
+            <span style="width:8px;height:8px;background:#1D9E75;border-radius:50%;margin-top:5px;flex-shrink:0"></span>
+            <div style="flex:1">
+              <p style="font-size:13px;color:#2C2C2A;line-height:1.45;margin-bottom:7px">My 4-year-old has had a fever of 39°C since last night. Should I be worried?</p>
+              <div style="display:flex;align-items:center;justify-content:space-between">
+                <span style="font-size:12px;color:#0F6E56;font-weight:500">Answered · Dr. Akua</span>
+                <span style="font-size:11px;color:#888780">5 min</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card" style="padding:13px;margin-bottom:9px">
+          <div style="display:flex;gap:10px">
+            <div style="display:flex;flex-direction:column;gap:4px;margin-top:4px;flex-shrink:0">
+              <span style="width:5px;height:5px;background:#D85A30;border-radius:50%;animation:rD 1.2s ease-in-out infinite"></span>
+              <span style="width:5px;height:5px;background:#D85A30;border-radius:50%;animation:rD 1.2s ease-in-out .2s infinite"></span>
+              <span style="width:5px;height:5px;background:#D85A30;border-radius:50%;animation:rD 1.2s ease-in-out .4s infinite"></span>
+            </div>
+            <div style="flex:1">
+              <p style="font-size:13px;color:#2C2C2A;line-height:1.45;margin-bottom:7px">What are my legal rights if my landlord refuses repairs?</p>
+              <div style="display:flex;align-items:center;justify-content:space-between">
+                <span style="font-size:12px;color:#888780">Routing to specialists…</span>
+                <span style="font-size:11px;color:#888780">12 min</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card" style="padding:13px;margin-bottom:16px;cursor:pointer" onclick="go('library')">
+          <div style="display:flex;gap:10px">
+            <span style="width:8px;height:8px;background:#EF9F27;border-radius:50%;margin-top:5px;flex-shrink:0"></span>
+            <div style="flex:1">
+              <p style="font-size:13px;color:#2C2C2A;line-height:1.45;margin-bottom:7px">Best time to plant maize in southern Togo?</p>
+              <span class="bdg" style="background:#FAEEDA;color:#633806">8 answers in library</span>
+            </div>
+          </div>
+        </div>
+        <p style="font-size:11px;font-weight:500;color:#888780;text-transform:uppercase;letter-spacing:.06em;margin-bottom:9px">Network activity</p>
+        <div style="display:flex;flex-direction:column;gap:6px">
+          <div style="display:flex;align-items:center;gap:10px;padding:9px 12px;background:#F5F2ED;border-radius:10px">
+            <span style="width:6px;height:6px;background:#1D9E75;border-radius:50%;flex-shrink:0"></span>
+            <p style="font-size:12px;color:#5F5E5A">Dr. Mensah answered 4 questions in the last hour</p>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;padding:9px 12px;background:#F5F2ED;border-radius:10px">
+            <span style="width:6px;height:6px;background:#D85A30;border-radius:50%;flex-shrink:0"></span>
+            <p style="font-size:12px;color:#5F5E5A">New specialist joined: Agriculture · Kara, TG</p>
+          </div>
+        </div>
+      </div>
+      <div class="bnav">
+        <div class="bni on"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#D85A30" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1z"/><path d="M9 21V12h6v9"/></svg><span class="bni-l" style="color:#D85A30">Home</span></div>
+        <div class="bni" onclick="go('library')"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#888780" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg><span class="bni-l">Library</span></div>
+        <div class="bfab-wrap"><div class="bfab" onclick="go('record')"><svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M12 1a4 4 0 014 4v7a4 4 0 01-8 0V5a4 4 0 014-4z"/><path d="M19 11v1a7 7 0 01-14 0v-1M12 19v4M8 23h8" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg></div></div>
+        <div class="bni" onclick="go('chats')"><div style="position:relative"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#888780" stroke-width="1.5" stroke-linecap="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg><div style="position:absolute;top:-4px;right:-5px;width:14px;height:14px;background:#E24B4A;border-radius:50%;border:2px solid #FBF8F4;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:600;color:#fff">2</div></div><span class="bni-l">Chats</span></div>
+        <div class="bni" onclick="go('profile')"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#888780" stroke-width="1.5" stroke-linecap="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span class="bni-l">Profile</span></div>
+      </div>
+    </div>
+
+    <!-- RECORD -->
+    <div class="scn" id="s-record">
+      <div class="sheader">
+        <div class="back" onclick="go('home')"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2C2C2A" stroke-width="1.6" stroke-linecap="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></div>
+        <p style="flex:1;font-size:16px;font-weight:500;color:#2C2C2A">Ask a question</p>
+        <div style="display:flex;align-items:center;gap:5px;background:#F0EDE8;padding:5px 10px;border-radius:100px;cursor:pointer">
+          <span style="font-size:11px;color:#5F5E5A;font-weight:500">Anonymous</span>
+          <div style="width:28px;height:16px;background:#D85A30;border-radius:8px;position:relative"><div style="width:12px;height:12px;background:white;border-radius:50%;position:absolute;top:2px;right:2px"></div></div>
+        </div>
+      </div>
+      <div class="sc" style="display:flex;flex-direction:column;align-items:center;padding:24px 18px 16px">
+        <div style="display:flex;align-items:center;gap:7px;padding:5px 16px;background:#FCEBEB;border-radius:100px;margin-bottom:24px">
+          <span style="width:7px;height:7px;background:#E24B4A;border-radius:50%;animation:pG .9s ease-in-out infinite"></span>
+          <span style="font-size:12px;font-weight:500;color:#A32D2D">Recording · 0:23</span>
+        </div>
+        <div id="rec-wave" style="display:flex;align-items:center;justify-content:center;gap:2.5px;height:56px;width:100%;padding:0 8px;margin-bottom:24px"></div>
+        <div style="position:relative;width:84px;height:84px;display:flex;align-items:center;justify-content:center;margin-bottom:16px">
+          <div style="position:absolute;width:84px;height:84px;border-radius:50%;border:1.5px solid #D85A30;animation:rO 1.8s ease-out infinite"></div>
+          <div style="position:absolute;width:84px;height:84px;border-radius:50%;border:1.5px solid #D85A30;animation:rO 1.8s ease-out .65s infinite"></div>
+          <div style="width:72px;height:72px;background:#D85A30;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="white"><path d="M12 1a4 4 0 014 4v7a4 4 0 01-8 0V5a4 4 0 014-4z"/></svg>
+          </div>
+        </div>
+        <p style="font-size:12px;color:#888780;margin-bottom:20px;text-align:center">Release to stop · Hold to re-record</p>
+        <div style="width:100%;background:#fff;border:.5px solid #E8E6E0;border-radius:12px;padding:12px 14px;margin-bottom:10px">
+          <p style="font-size:10px;color:#888780;margin-bottom:5px;letter-spacing:.04em;text-transform:uppercase">Detected topic</p>
+          <div style="display:flex;align-items:center;gap:7px">
+            <span class="bdg" style="background:#FAECE7;color:#993C1D">Medical</span>
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#B4B2A9" stroke-width="1.5"><polyline points="9 18 15 12 9 6"/></svg>
+            <span style="font-size:12px;color:#5F5E5A">Maternal &amp; Child Health</span>
+          </div>
+        </div>
+        <div style="width:100%;background:#F5F2ED;border-radius:12px;padding:12px 14px;margin-bottom:20px">
+          <p style="font-size:10px;color:#888780;margin-bottom:5px;letter-spacing:.04em;text-transform:uppercase">Transcription</p>
+          <p style="font-size:13px;color:#2C2C2A;line-height:1.5;font-style:italic">"My four-year-old has had a fever of thirty-nine degrees since last night. Should I be worried?"</p>
+        </div>
+        <div style="display:flex;gap:10px;width:100%;margin-bottom:14px">
+          <div style="flex:1;padding:12px;border:1px solid #E8E6E0;border-radius:12px;text-align:center;cursor:pointer" onclick="go('home')"><p style="font-size:14px;font-weight:500;color:#5F5E5A">Cancel</p></div>
+          <div style="flex:2;padding:12px;background:#D85A30;border-radius:12px;text-align:center;cursor:pointer" onclick="go('answer')"><p style="font-size:14px;font-weight:500;color:#fff">Send question →</p></div>
+        </div>
+        <div style="cursor:pointer" onclick="go('emergency')"><p style="font-size:12px;color:#E24B4A;text-align:center">▲ Preview emergency detection screen</p></div>
+      </div>
+    </div>
+
+    <!-- ANSWER -->
+    <div class="scn" id="s-answer">
+      <div class="sheader">
+        <div class="back" onclick="go('home')"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2C2C2A" stroke-width="1.6" stroke-linecap="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></div>
+        <p style="flex:1;font-size:16px;font-weight:500;color:#2C2C2A">Answer received</p>
+        <span class="bdg" style="background:#E1F5EE;color:#0F6E56">Verified</span>
+      </div>
+      <div class="sc" style="padding:14px">
+        <div style="background:#F5F2ED;border-radius:12px;padding:10px 13px;margin-bottom:13px">
+          <p style="font-size:12px;color:#5F5E5A;line-height:1.45">My 4-year-old has had a fever of 39°C since last night. Should I be worried?</p>
+        </div>
+        <div class="card" style="padding:15px;margin-bottom:13px">
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:11px">
+            <div style="width:40px;height:40px;background:#D85A30;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            </div>
+            <div id="play-wave" style="flex:1;display:flex;align-items:center;gap:1.5px;height:34px;overflow:hidden"></div>
+            <span style="font-size:12px;color:#888780;flex-shrink:0">1:48</span>
+          </div>
+          <div style="height:2px;background:#E8E6E0;border-radius:1px"><div style="width:35%;height:100%;background:#D85A30;border-radius:1px"></div></div>
+        </div>
+        <div class="card" style="padding:13px;margin-bottom:13px;cursor:pointer" onclick="go('specialist')">
+          <div style="display:flex;align-items:center;gap:11px;margin-bottom:10px">
+            <div style="width:46px;height:46px;border-radius:50%;background:#E1F5EE;display:flex;align-items:center;justify-content:center;font-family:'Fraunces Variable',Georgia,serif;font-size:16px;font-weight:600;color:#0F6E56;flex-shrink:0">AK</div>
+            <div style="flex:1">
+              <div style="display:flex;align-items:center;gap:5px;margin-bottom:1px">
+                <p style="font-size:14px;font-weight:500;color:#2C2C2A">Dr. Akua Mensah</p>
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="#1D9E75"><path d="M12 2l3 6.3 7 1-5 4.9 1.2 6.8L12 17.8 5.9 21l1.2-6.8L2 9.3l7-1L12 2z"/></svg>
+              </div>
+              <p style="font-size:12px;color:#5F5E5A">Pediatrician · Lomé, TG · tap to view profile</p>
+            </div>
+            <div style="text-align:right">
+              <p style="font-size:18px;font-weight:500;color:#2C2C2A;font-family:'Fraunces Variable',Georgia,serif">4.9</p>
+              <p style="font-size:10px;color:#888780">247 answers</p>
+            </div>
+          </div>
+          <div style="border-top:.5px solid #E8E6E0;padding-top:10px">
+            <p style="font-size:13px;color:#2C2C2A;line-height:1.55">"A fever of 39°C lasting over 24 hours in a 4-year-old warrants attention. Monitor for difficulty breathing, rash, stiff neck, or extreme lethargy — these need immediate care…"</p>
+          </div>
+        </div>
+        <div style="display:flex;gap:10px;margin-bottom:13px">
+          <div style="flex:1;padding:11px;background:#E1F5EE;border-radius:12px;cursor:pointer;text-align:center;font-size:13px;font-weight:500;color:#0F6E56">Helpful</div>
+          <div style="flex:1;padding:11px;background:#F5F2ED;border-radius:12px;cursor:pointer;text-align:center;font-size:13px;color:#5F5E5A">Not helpful</div>
+        </div>
+        <div style="padding:13px 14px;background:#FAECE7;border-radius:14px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;margin-bottom:10px" onclick="go('chats')">
+          <div><p style="font-size:13px;font-weight:500;color:#2C2C2A;margin-bottom:1px">Need more detail?</p><p style="font-size:12px;color:#993C1D">Request a 30-min chat with Dr. Akua</p></div>
+          <div style="width:34px;height:34px;background:#D85A30;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.6" stroke-linecap="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div>
+        </div>
+        <p style="font-size:12px;color:#888780;text-align:center;padding:6px">7 other people asked a similar question this month</p>
+      </div>
+      <div class="bnav">
+        <div class="bni" onclick="go('home')"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#888780" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1z"/><path d="M9 21V12h6v9"/></svg><span class="bni-l">Home</span></div>
+        <div class="bni" onclick="go('library')"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#888780" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg><span class="bni-l">Library</span></div>
+        <div class="bfab-wrap"><div class="bfab" onclick="go('record')"><svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M12 1a4 4 0 014 4v7a4 4 0 01-8 0V5a4 4 0 014-4z"/></svg></div></div>
+        <div class="bni" onclick="go('chats')"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#888780" stroke-width="1.5" stroke-linecap="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg><span class="bni-l">Chats</span></div>
+        <div class="bni" onclick="go('profile')"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#888780" stroke-width="1.5" stroke-linecap="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span class="bni-l">Profile</span></div>
+      </div>
+    </div>
+
+    <!-- SPECIALIST FEED -->
+    <div class="scn" id="s-feed">
+      <div style="padding:13px 16px 11px;background:#FBF8F4;border-bottom:.5px solid #E8E6E0;flex-shrink:0">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:11px">
+          <div>
+            <p style="font-size:11px;color:#888780;margin-bottom:1px">Welcome back,</p>
+            <p style="font-family:'Fraunces Variable',Georgia,serif;font-size:20px;font-weight:600;color:#2C2C2A">Dr. Kofi Agyemang</p>
+          </div>
+          <div style="display:flex;align-items:center;gap:5px;background:#E1F5EE;padding:6px 12px;border-radius:100px;cursor:pointer">
+            <span style="width:7px;height:7px;background:#1D9E75;border-radius:50%;animation:pG 2s ease-in-out infinite"></span>
+            <span style="font-size:12px;font-weight:500;color:#0F6E56">Online</span>
+          </div>
+        </div>
+        <div style="display:flex;gap:8px">
+          <div style="flex:1;background:#fff;border:.5px solid #E8E6E0;border-radius:10px;padding:8px;text-align:center"><p style="font-size:16px;font-weight:500;color:#2C2C2A;font-family:'Fraunces Variable',Georgia,serif">23</p><p style="font-size:10px;color:#888780">answered</p></div>
+          <div style="flex:1;background:#fff;border:.5px solid #E8E6E0;border-radius:10px;padding:8px;text-align:center"><p style="font-size:16px;font-weight:500;color:#2C2C2A;font-family:'Fraunces Variable',Georgia,serif">4.9</p><p style="font-size:10px;color:#888780">reputation</p></div>
+          <div style="flex:1;background:#FAECE7;border:.5px solid #F5C4B3;border-radius:10px;padding:8px;text-align:center"><p style="font-size:16px;font-weight:500;color:#D85A30;font-family:'Fraunces Variable',Georgia,serif">3</p><p style="font-size:10px;color:#993C1D">waiting</p></div>
+        </div>
+      </div>
+      <div style="display:flex;gap:8px;padding:10px 16px;border-bottom:.5px solid #E8E6E0;flex-shrink:0;overflow-x:auto">
+        <span style="white-space:nowrap;padding:5px 14px;background:#D85A30;color:white;border-radius:100px;font-size:12px;font-weight:500;cursor:pointer;flex-shrink:0">All (3)</span>
+        <span style="white-space:nowrap;padding:5px 14px;background:#F5F2ED;color:#5F5E5A;border-radius:100px;font-size:12px;cursor:pointer;flex-shrink:0">Medical</span>
+        <span style="white-space:nowrap;padding:5px 14px;background:#FCEBEB;color:#A32D2D;border-radius:100px;font-size:12px;cursor:pointer;flex-shrink:0">Urgent (1)</span>
+        <span style="white-space:nowrap;padding:5px 14px;background:#F5F2ED;color:#5F5E5A;border-radius:100px;font-size:12px;cursor:pointer;flex-shrink:0">Nearest</span>
+      </div>
+      <div class="sc" style="padding:12px 16px">
+        <div style="background:#fff;border-radius:14px;border-left:3px solid #E24B4A;border-top:.5px solid #E8E6E0;border-right:.5px solid #E8E6E0;border-bottom:.5px solid #E8E6E0;padding:13px;margin-bottom:10px">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:7px">
+            <span class="bdg" style="background:#FCEBEB;color:#A32D2D"><span style="width:5px;height:5px;background:#E24B4A;border-radius:50%;animation:pG .9s infinite;display:inline-block;margin-right:3px"></span>URGENT</span>
+            <span style="font-size:11px;color:#888780">3 min · Lomé</span>
+          </div>
+          <p style="font-size:13px;color:#2C2C2A;line-height:1.45;margin-bottom:8px">Child not responding after a fall. Breathing but unconscious for 10 minutes…</p>
+          <div style="display:flex;gap:8px">
+            <div style="flex:2;padding:10px;background:#D85A30;border-radius:10px;text-align:center;cursor:pointer"><p style="font-size:13px;font-weight:500;color:white">Answer now</p></div>
+            <div style="flex:1;padding:10px;background:#F5F2ED;border-radius:10px;text-align:center;cursor:pointer"><p style="font-size:13px;color:#5F5E5A">Skip</p></div>
+          </div>
+        </div>
+        <div class="card" style="padding:13px;margin-bottom:10px">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:7px">
+            <span class="bdg" style="background:#FAECE7;color:#993C1D">Medical</span>
+            <span style="font-size:11px;color:#888780">12 min · Kara</span>
+          </div>
+          <p style="font-size:13px;color:#2C2C2A;line-height:1.45;margin-bottom:10px">I have had back pain for 3 weeks, mostly when I wake up. Is this serious?</p>
+          <div style="display:flex;gap:8px">
+            <div style="flex:2;padding:10px;background:#D85A30;border-radius:10px;text-align:center;cursor:pointer"><p style="font-size:13px;font-weight:500;color:white">Answer</p></div>
+            <div style="flex:1;padding:10px;background:#F5F2ED;border-radius:10px;text-align:center;cursor:pointer"><p style="font-size:13px;color:#5F5E5A">Skip</p></div>
+          </div>
+        </div>
+        <div style="background:#FAEEDA;border-radius:14px;padding:13px;display:flex;align-items:center;gap:11px">
+          <div style="font-size:20px;flex-shrink:0;color:#BA7517">✦</div>
+          <div><p style="font-size:13px;font-weight:500;color:#412402;margin-bottom:1px">Your knowledge helped 47 people</p><p style="font-size:11px;color:#633806">while you were away · this month</p></div>
+        </div>
+      </div>
+      <div class="bnav">
+        <div class="bni" onclick="go('home')"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#888780" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1z"/><path d="M9 21V12h6v9"/></svg><span class="bni-l">Home</span></div>
+        <div class="bni on"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#D85A30" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg><span class="bni-l" style="color:#D85A30">Library</span></div>
+        <div class="bfab-wrap"><div class="bfab" onclick="go('record')"><svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M12 1a4 4 0 014 4v7a4 4 0 01-8 0V5a4 4 0 014-4z"/></svg></div></div>
+        <div class="bni" onclick="go('chats')"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#888780" stroke-width="1.5" stroke-linecap="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg><span class="bni-l">Chats</span></div>
+        <div class="bni" onclick="go('profile')"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#888780" stroke-width="1.5" stroke-linecap="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span class="bni-l">Profile</span></div>
+      </div>
+    </div>
+
+    <!-- EMERGENCY -->
+    <div class="scn" id="s-emergency">
+      <div style="flex:1;background:#E24B4A;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px 22px;text-align:center">
+        <div style="width:68px;height:68px;border:2px solid rgba(255,255,255,.45);border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:18px">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17" stroke-width="2.5"/></svg>
+        </div>
+        <p style="font-size:10px;font-weight:500;color:rgba(255,255,255,.6);letter-spacing:.1em;margin-bottom:4px">EMERGENCY DETECTED</p>
+        <p style="font-family:'Fraunces Variable',Georgia,serif;font-size:21px;font-weight:600;color:white;line-height:1.3;margin-bottom:5px">This needs immediate action</p>
+        <p style="font-size:13px;color:rgba(255,255,255,.8);margin-bottom:22px">Possible poisoning detected · Acting now may save a life</p>
+        <div style="width:100%;text-align:left;margin-bottom:20px;display:flex;flex-direction:column;gap:7px">
+          <div style="display:flex;align-items:flex-start;gap:11px;background:rgba(255,255,255,.15);border-radius:12px;padding:11px 13px">
+            <div style="width:22px;height:22px;background:rgba(255,255,255,.9);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0"><span style="font-size:11px;font-weight:600;color:#E24B4A">1</span></div>
+            <p style="font-size:13px;color:white;line-height:1.45">Do NOT make the person vomit — it causes further damage</p>
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:11px;background:rgba(255,255,255,.15);border-radius:12px;padding:11px 13px">
+            <div style="width:22px;height:22px;background:rgba(255,255,255,.9);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0"><span style="font-size:11px;font-weight:600;color:#E24B4A">2</span></div>
+            <p style="font-size:13px;color:white;line-height:1.45">Keep the person calm and sitting upright</p>
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:11px;background:rgba(255,255,255,.15);border-radius:12px;padding:11px 13px">
+            <div style="width:22px;height:22px;background:rgba(255,255,255,.9);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0"><span style="font-size:11px;font-weight:600;color:#E24B4A">3</span></div>
+            <p style="font-size:13px;color:white;line-height:1.45">Note the substance name and tell the emergency operator</p>
+          </div>
+        </div>
+        <div style="width:100%;background:white;border-radius:14px;padding:14px;text-align:center;cursor:pointer;margin-bottom:9px">
+          <p style="font-size:11px;color:#888780;margin-bottom:1px">Emergency services · Togo</p>
+          <p style="font-family:'Fraunces Variable',Georgia,serif;font-size:24px;font-weight:600;color:#E24B4A">Call 117 now</p>
+        </div>
+        <div style="width:100%;border:1.5px solid rgba(255,255,255,.4);border-radius:14px;padding:12px;text-align:center;cursor:pointer;margin-bottom:16px">
+          <p style="font-size:13px;color:white;font-weight:500">Cannot call · Alert 3 contacts + GPS</p>
+          <p style="font-size:11px;color:rgba(255,255,255,.65)">Works without internet · SMS only</p>
+        </div>
+        <div style="cursor:pointer" onclick="go('record')"><p style="font-size:12px;color:rgba(255,255,255,.5)">This is not an emergency — go back</p></div>
+      </div>
+    </div>
+
+    <!-- ══════ USER PROFILE (NEW) ══════ -->
+    <div class="scn" id="s-profile">
+      <div style="padding:14px 16px 0;background:#FBF8F4;border-bottom:.5px solid #E8E6E0;flex-shrink:0">
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:14px">
+          <div style="display:flex;align-items:center;gap:13px">
+            <div style="width:58px;height:58px;border-radius:50%;background:#D85A30;display:flex;align-items:center;justify-content:center;font-family:'Fraunces Variable',Georgia,serif;font-size:20px;font-weight:600;color:#fff;flex-shrink:0">AA</div>
+            <div>
+              <p style="font-family:'Fraunces Variable',Georgia,serif;font-size:18px;font-weight:600;color:#2C2C2A;margin-bottom:2px">Ama Asante</p>
+              <div style="display:flex;align-items:center;gap:5px;margin-bottom:3px">
+                <span class="bdg" style="background:#E1F5EE;color:#0F6E56">Community member</span>
+              </div>
+              <p style="font-size:11px;color:#888780">Lomé, Togo · joined March 2024</p>
+            </div>
+          </div>
+          <div style="cursor:pointer;width:34px;height:34px;background:#F0EDE8;border-radius:50%;display:flex;align-items:center;justify-content:center" onclick="go('settings')">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#5F5E5A" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+          </div>
+        </div>
+        <div style="display:flex;gap:1px;margin-bottom:0">
+          <div style="flex:1;padding:10px 0;text-align:center;border-bottom:2px solid #D85A30"><p style="font-size:14px;font-weight:500;color:#2C2C2A">Questions</p></div>
+          <div style="flex:1;padding:10px 0;text-align:center;border-bottom:.5px solid #E8E6E0"><p style="font-size:14px;color:#888780">Activity</p></div>
+          <div style="flex:1;padding:10px 0;text-align:center;border-bottom:.5px solid #E8E6E0"><p style="font-size:14px;color:#888780">Saved</p></div>
+        </div>
+      </div>
+      <div class="sc" style="padding:14px 16px">
+        <div style="display:flex;gap:8px;margin-bottom:14px">
+          <div style="flex:1;background:#fff;border:.5px solid #E8E6E0;border-radius:12px;padding:11px;text-align:center">
+            <p style="font-family:'Fraunces Variable',Georgia,serif;font-size:22px;font-weight:600;color:#2C2C2A">14</p>
+            <p style="font-size:10px;color:#888780">questions asked</p>
+          </div>
+          <div style="flex:1;background:#fff;border:.5px solid #E8E6E0;border-radius:12px;padding:11px;text-align:center">
+            <p style="font-family:'Fraunces Variable',Georgia,serif;font-size:22px;font-weight:600;color:#1D9E75">11</p>
+            <p style="font-size:10px;color:#888780">answered</p>
+          </div>
+          <div style="flex:1;background:#FAECE7;border:.5px solid #F5C4B3;border-radius:12px;padding:11px;text-align:center">
+            <p style="font-family:'Fraunces Variable',Georgia,serif;font-size:22px;font-weight:600;color:#D85A30">4.8</p>
+            <p style="font-size:10px;color:#993C1D">avg rating</p>
+          </div>
+        </div>
+        <div style="background:#F5F2ED;border-radius:12px;padding:11px 13px;margin-bottom:14px;display:flex;align-items:center;gap:11px">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#5F5E5A" stroke-width="1.5" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          <div>
+            <p style="font-size:12px;font-weight:500;color:#2C2C2A;margin-bottom:1px">Identity verified</p>
+            <p style="font-size:11px;color:#5F5E5A">Phone · +228 ···· 4821</p>
+          </div>
+          <span class="bdg" style="background:#E1F5EE;color:#0F6E56;margin-left:auto">Active</span>
+        </div>
+        <p style="font-size:11px;font-weight:500;color:#888780;text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px">Recent questions</p>
+        <div class="card" style="padding:13px;margin-bottom:9px;cursor:pointer" onclick="go('answer')">
+          <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:6px">
+            <p style="font-size:13px;color:#2C2C2A;line-height:1.4;flex:1">My 4-year-old has had a fever of 39°C since last night…</p>
+            <span class="bdg" style="background:#E1F5EE;color:#0F6E56;flex-shrink:0">Answered</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:6px">
+            <span class="bdg" style="background:#FAECE7;color:#993C1D">Medical</span>
+            <span style="font-size:11px;color:#888780">5 min ago · Dr. Akua</span>
+          </div>
+        </div>
+        <div class="card" style="padding:13px;margin-bottom:9px">
+          <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:6px">
+            <p style="font-size:13px;color:#2C2C2A;line-height:1.4;flex:1">What are my legal rights if my landlord refuses repairs?</p>
+            <span class="bdg" style="background:#FAECE7;color:#993C1D;flex-shrink:0">Routing</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:6px">
+            <span class="bdg" style="background:#F5F2ED;color:#5F5E5A">Legal</span>
+            <span style="font-size:11px;color:#888780">12 min ago</span>
+          </div>
+        </div>
+        <div class="card" style="padding:13px;margin-bottom:14px;cursor:pointer" onclick="go('library')">
+          <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:6px">
+            <p style="font-size:13px;color:#2C2C2A;line-height:1.4;flex:1">Best time to plant maize in southern Togo?</p>
+            <span class="bdg" style="background:#FAEEDA;color:#633806;flex-shrink:0">Library</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:6px">
+            <span class="bdg" style="background:#F5F2ED;color:#5F5E5A">Agriculture</span>
+            <span style="font-size:11px;color:#888780">2 hrs ago</span>
+          </div>
+        </div>
+        <div style="padding:13px 14px;background:#FBF8F4;border:.5px solid #E8E6E0;border-radius:14px;cursor:pointer" onclick="go('settings')">
+          <div style="display:flex;align-items:center;justify-content:space-between">
+            <div style="display:flex;align-items:center;gap:10px">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#5F5E5A" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+              <p style="font-size:14px;color:#2C2C2A">Settings</p>
+            </div>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#B4B2A9" stroke-width="1.5"><polyline points="9 18 15 12 9 6"/></svg>
+          </div>
+        </div>
+      </div>
+      <div class="bnav">
+        <div class="bni" onclick="go('home')"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#888780" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1z"/><path d="M9 21V12h6v9"/></svg><span class="bni-l">Home</span></div>
+        <div class="bni" onclick="go('library')"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#888780" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg><span class="bni-l">Library</span></div>
+        <div class="bfab-wrap"><div class="bfab" onclick="go('record')"><svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M12 1a4 4 0 014 4v7a4 4 0 01-8 0V5a4 4 0 014-4z"/></svg></div></div>
+        <div class="bni" onclick="go('chats')"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#888780" stroke-width="1.5" stroke-linecap="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg><span class="bni-l">Chats</span></div>
+        <div class="bni on"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#D85A30" stroke-width="1.5" stroke-linecap="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span class="bni-l" style="color:#D85A30">Profile</span></div>
+      </div>
+    </div>
+
+    <!-- ══════ SETTINGS (NEW) ══════ -->
+    <div class="scn" id="s-settings">
+      <div class="sheader">
+        <div class="back" onclick="go('profile')"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2C2C2A" stroke-width="1.6" stroke-linecap="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></div>
+        <p style="flex:1;font-size:16px;font-weight:500;color:#2C2C2A">Settings</p>
+      </div>
+      <div class="sc" style="padding:14px 16px">
+        <p style="font-size:11px;font-weight:500;color:#888780;text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px">Language</p>
+        <div class="card" style="margin-bottom:16px;overflow:hidden">
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:13px 14px;border-bottom:.5px solid #E8E6E0">
+            <div style="display:flex;align-items:center;gap:10px">
+              <div style="width:30px;height:20px;background:#D85A30;border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:600;color:#fff">FR</div>
+              <p style="font-size:14px;color:#2C2C2A">Français</p>
+            </div>
+            <div style="width:18px;height:18px;border-radius:50%;background:#D85A30;display:flex;align-items:center;justify-content:center"><svg width="10" height="8" viewBox="0 0 12 10" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><polyline points="1 5 4.5 8.5 11 1.5"/></svg></div>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:13px 14px;border-bottom:.5px solid #E8E6E0">
+            <div style="display:flex;align-items:center;gap:10px">
+              <div style="width:30px;height:20px;background:#888780;border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:600;color:#fff">EN</div>
+              <p style="font-size:14px;color:#888780">English</p>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:13px 14px">
+            <div style="display:flex;align-items:center;gap:10px">
+              <div style="width:30px;height:20px;background:#1D9E75;border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:600;color:#fff">EW</div>
+              <p style="font-size:14px;color:#888780">Eʋegbe (Ewe)</p>
+            </div>
+          </div>
+        </div>
+
+        <p style="font-size:11px;font-weight:500;color:#888780;text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px">Privacy &amp; safety</p>
+        <div class="card" style="margin-bottom:16px;overflow:hidden">
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:13px 14px;border-bottom:.5px solid #E8E6E0">
+            <div>
+              <p style="font-size:14px;color:#2C2C2A;margin-bottom:1px">Anonymous by default</p>
+              <p style="font-size:11px;color:#888780">Strip identity before routing</p>
+            </div>
+            <div class="tog" style="background:#D85A30"><div class="tog-k" style="left:18px"></div></div>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:13px 14px;border-bottom:.5px solid #E8E6E0">
+            <div>
+              <p style="font-size:14px;color:#2C2C2A;margin-bottom:1px">Show profile to specialists</p>
+              <p style="font-size:11px;color:#888780">They see your city, not your name</p>
+            </div>
+            <div class="tog" style="background:#D85A30"><div class="tog-k" style="left:18px"></div></div>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:13px 14px">
+            <div>
+              <p style="font-size:14px;color:#2C2C2A;margin-bottom:1px">Location precision</p>
+              <p style="font-size:11px;color:#888780">City level only</p>
+            </div>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#B4B2A9" stroke-width="1.5"><polyline points="9 18 15 12 9 6"/></svg>
+          </div>
+        </div>
+
+        <p style="font-size:11px;font-weight:500;color:#888780;text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px">Notifications</p>
+        <div class="card" style="margin-bottom:16px;overflow:hidden">
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:13px 14px;border-bottom:.5px solid #E8E6E0">
+            <p style="font-size:14px;color:#2C2C2A">New answer received</p>
+            <div class="tog" style="background:#D85A30"><div class="tog-k" style="left:18px"></div></div>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:13px 14px;border-bottom:.5px solid #E8E6E0">
+            <p style="font-size:14px;color:#2C2C2A">Specialist goes online</p>
+            <div class="tog" style="background:#D3D1C7"><div class="tog-k" style="left:2px"></div></div>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:13px 14px">
+            <p style="font-size:14px;color:#2C2C2A">Community alerts</p>
+            <div class="tog" style="background:#D85A30"><div class="tog-k" style="left:18px"></div></div>
+          </div>
+        </div>
+
+        <p style="font-size:11px;font-weight:500;color:#888780;text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px">Offline &amp; data</p>
+        <div class="card" style="margin-bottom:16px;overflow:hidden">
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:13px 14px;border-bottom:.5px solid #E8E6E0">
+            <div>
+              <p style="font-size:14px;color:#2C2C2A;margin-bottom:1px">Download offline pack</p>
+              <p style="font-size:11px;color:#888780">Medical · 3.2 MB</p>
+            </div>
+            <span class="bdg" style="background:#FAECE7;color:#993C1D">Download</span>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:13px 14px">
+            <div>
+              <p style="font-size:14px;color:#2C2C2A;margin-bottom:1px">Mesh mode (WiFi Direct)</p>
+              <p style="font-size:11px;color:#888780">For no-internet zones</p>
+            </div>
+            <div class="tog" style="background:#D3D1C7"><div class="tog-k" style="left:2px"></div></div>
+          </div>
+        </div>
+
+        <div style="padding:13px 14px;border:.5px solid #F7C1C1;border-radius:14px;cursor:pointer">
+          <p style="font-size:14px;color:#E24B4A;text-align:center;font-weight:500">Sign out</p>
+        </div>
+        <p style="font-size:11px;color:#B4B2A9;text-align:center;margin-top:12px">Sema v0.9.1 · Sprint 2 · Build 41</p>
+      </div>
+    </div>
+
+    <!-- ══════ SPECIALIST PUBLIC PROFILE (NEW) ══════ -->
+    <div class="scn" id="s-specialist">
+      <div class="sheader">
+        <div class="back" onclick="go('answer')"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2C2C2A" stroke-width="1.6" stroke-linecap="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></div>
+        <p style="flex:1;font-size:16px;font-weight:500;color:#2C2C2A">Specialist profile</p>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#888780" stroke-width="1.5" stroke-linecap="round" style="cursor:pointer"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+      </div>
+      <div class="sc">
+        <div style="background:#D85A30;padding:24px 16px 36px;position:relative">
+          <div style="display:flex;align-items:flex-start;gap:14px">
+            <div style="width:68px;height:68px;border-radius:50%;background:rgba(255,255,255,.22);display:flex;align-items:center;justify-content:center;font-family:'Fraunces Variable',Georgia,serif;font-size:24px;font-weight:600;color:#fff;flex-shrink:0;border:2px solid rgba(255,255,255,.4)">AK</div>
+            <div style="flex:1;padding-top:4px">
+              <div style="display:flex;align-items:center;gap:6px;margin-bottom:3px">
+                <p style="font-family:'Fraunces Variable',Georgia,serif;font-size:20px;font-weight:600;color:#fff">Dr. Akua Mensah</p>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="rgba(255,255,255,.9)"><path d="M12 2l3 6.3 7 1-5 4.9 1.2 6.8L12 17.8 5.9 21l1.2-6.8L2 9.3l7-1L12 2z"/></svg>
+              </div>
+              <p style="font-size:13px;color:rgba(255,255,255,.8);margin-bottom:5px">Pediatrician &amp; General Medicine</p>
+              <div style="display:flex;align-items:center;gap:5px">
+                <svg width="11" height="13" viewBox="0 0 11 13" fill="rgba(255,255,255,.65)"><path d="M5.5 0A4.5 4.5 0 0110 4.5C10 8 5.5 13 5.5 13S1 8 1 4.5A4.5 4.5 0 015.5 0zm0 2.5a2 2 0 100 4 2 2 0 000-4z"/></svg>
+                <span style="font-size:12px;color:rgba(255,255,255,.75)">Lomé, Togo</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div style="background:#fff;border-radius:18px 18px 0 0;margin-top:-18px;padding:18px 16px">
+          <div style="display:flex;gap:8px;margin-bottom:16px">
+            <div style="flex:1;background:#F5F2ED;border-radius:12px;padding:11px;text-align:center">
+              <p style="font-family:'Fraunces Variable',Georgia,serif;font-size:20px;font-weight:600;color:#D85A30">4.9</p>
+              <p style="font-size:10px;color:#888780">reputation</p>
+            </div>
+            <div style="flex:1;background:#F5F2ED;border-radius:12px;padding:11px;text-align:center">
+              <p style="font-family:'Fraunces Variable',Georgia,serif;font-size:20px;font-weight:600;color:#2C2C2A">247</p>
+              <p style="font-size:10px;color:#888780">answers</p>
+            </div>
+            <div style="flex:1;background:#F5F2ED;border-radius:12px;padding:11px;text-align:center">
+              <p style="font-family:'Fraunces Variable',Georgia,serif;font-size:20px;font-weight:600;color:#2C2C2A">18m</p>
+              <p style="font-size:10px;color:#888780">avg response</p>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;gap:6px;margin-bottom:14px;padding:10px 12px;background:#E1F5EE;border-radius:10px">
+            <span style="width:8px;height:8px;background:#1D9E75;border-radius:50%;animation:pG 2s ease-in-out infinite;flex-shrink:0"></span>
+            <p style="font-size:13px;color:#0F6E56;font-weight:500">Available now · Replies within 20 minutes</p>
+          </div>
+          <p style="font-size:13px;color:#5F5E5A;line-height:1.6;margin-bottom:14px">Pediatrician with 12 years of clinical experience in West Africa. Trained at University of Ghana Medical School and Hôpital de Lomé. Passionate about accessible community health and mother-child care in under-resourced settings.</p>
+          <p style="font-size:11px;font-weight:500;color:#888780;text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px">Specialties</p>
+          <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px">
+            <span class="bdg" style="background:#FAECE7;color:#993C1D">Pediatrics</span>
+            <span class="bdg" style="background:#FAECE7;color:#993C1D">Maternal health</span>
+            <span class="bdg" style="background:#FAECE7;color:#993C1D">Fever &amp; infections</span>
+            <span class="bdg" style="background:#FAECE7;color:#993C1D">Nutrition</span>
+            <span class="bdg" style="background:#F5F2ED;color:#5F5E5A">General medicine</span>
+          </div>
+          <p style="font-size:11px;font-weight:500;color:#888780;text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px">Recent answers</p>
+          <div class="card" style="padding:12px;margin-bottom:9px">
+            <p style="font-size:13px;color:#2C2C2A;line-height:1.4;margin-bottom:6px">My 4-year-old has had a fever of 39°C since last night…</p>
+            <div style="display:flex;align-items:center;gap:6px">
+              <div style="display:flex;gap:2px">
+                <span style="color:#EF9F27;font-size:12px">★★★★★</span>
+              </div>
+              <span style="font-size:11px;color:#888780">5 min ago</span>
+            </div>
+          </div>
+          <div class="card" style="padding:12px;margin-bottom:9px">
+            <p style="font-size:13px;color:#2C2C2A;line-height:1.4;margin-bottom:6px">Is it safe to give ibuprofen and paracetamol together to a child?</p>
+            <div style="display:flex;align-items:center;gap:6px">
+              <div style="display:flex;gap:2px">
+                <span style="color:#EF9F27;font-size:12px">★★★★★</span>
+              </div>
+              <span style="font-size:11px;color:#888780">2 hrs ago</span>
+            </div>
+          </div>
+          <div style="display:flex;gap:8px;margin-top:6px">
+            <div style="flex:2;padding:13px;background:#D85A30;border-radius:14px;text-align:center;cursor:pointer" onclick="go('chats')">
+              <p style="font-size:14px;font-weight:500;color:#fff">Request consultation</p>
+            </div>
+            <div style="flex:1;padding:13px;background:#F5F2ED;border-radius:14px;text-align:center;cursor:pointer">
+              <p style="font-size:14px;color:#5F5E5A">Follow</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════ LIBRARY (NEW) ══════ -->
+    <div class="scn" id="s-library">
+      <div style="padding:14px 16px 10px;background:#FBF8F4;border-bottom:.5px solid #E8E6E0;flex-shrink:0">
+        <p style="font-family:'Fraunces Variable',Georgia,serif;font-size:20px;font-weight:600;color:#2C2C2A;margin-bottom:11px">Already Answered</p>
+        <div style="display:flex;align-items:center;gap:9px;background:#fff;border:.5px solid #E8E6E0;border-radius:12px;padding:10px 13px;margin-bottom:11px">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#888780" stroke-width="1.5" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <p style="font-size:14px;color:#B4B2A9">Search 2,400+ answered questions</p>
+        </div>
+        <div style="display:flex;gap:7px;overflow-x:auto;padding-bottom:2px">
+          <span style="white-space:nowrap;padding:5px 13px;background:#D85A30;color:white;border-radius:100px;font-size:12px;font-weight:500;cursor:pointer;flex-shrink:0">All</span>
+          <span style="white-space:nowrap;padding:5px 13px;background:#FAECE7;color:#993C1D;border-radius:100px;font-size:12px;cursor:pointer;flex-shrink:0">Medical</span>
+          <span style="white-space:nowrap;padding:5px 13px;background:#F5F2ED;color:#5F5E5A;border-radius:100px;font-size:12px;cursor:pointer;flex-shrink:0">Legal</span>
+          <span style="white-space:nowrap;padding:5px 13px;background:#F5F2ED;color:#5F5E5A;border-radius:100px;font-size:12px;cursor:pointer;flex-shrink:0">Agriculture</span>
+          <span style="white-space:nowrap;padding:5px 13px;background:#F5F2ED;color:#5F5E5A;border-radius:100px;font-size:12px;cursor:pointer;flex-shrink:0">Education</span>
+        </div>
+      </div>
+      <div class="sc" style="padding:12px 16px">
+        <div style="background:#FAEEDA;border-radius:12px;padding:10px 13px;margin-bottom:12px;display:flex;align-items:center;gap:9px">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#BA7517" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          <p style="font-size:12px;color:#633806">Similar to your question about maize planting</p>
+        </div>
+        <div class="card" style="padding:13px;margin-bottom:9px;cursor:pointer" onclick="go('answer')">
+          <p style="font-size:13px;color:#2C2C2A;font-weight:500;line-height:1.4;margin-bottom:7px">Best time to plant maize in southern Togo?</p>
+          <p style="font-size:12px;color:#5F5E5A;line-height:1.5;margin-bottom:9px">"The optimal planting window in the coastal south is April–May for the main season and September–October for the minor season. Watch for the first consistent rains…"</p>
+          <div style="display:flex;align-items:center;justify-content:space-between">
+            <div style="display:flex;align-items:center;gap:6px">
+              <div style="width:22px;height:22px;border-radius:50%;background:#F5F2ED;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:600;color:#5F5E5A">KD</div>
+              <span style="font-size:12px;color:#5F5E5A">Kwame Dogli · Agronomist</span>
+            </div>
+            <div style="display:flex;gap:2px"><span style="color:#EF9F27;font-size:11px">★★★★★</span></div>
+          </div>
+        </div>
+        <div class="card" style="padding:13px;margin-bottom:9px;cursor:pointer">
+          <p style="font-size:13px;color:#2C2C2A;font-weight:500;line-height:1.4;margin-bottom:7px">What fertilizer is best for maize in laterite soil?</p>
+          <p style="font-size:12px;color:#5F5E5A;line-height:1.5;margin-bottom:9px">"For laterite-dominant soils in Togo, NPK 15-15-15 at planting followed by urea top-dressing 4 weeks after emergence gives the best yield response…"</p>
+          <div style="display:flex;align-items:center;justify-content:space-between">
+            <div style="display:flex;align-items:center;gap:6px">
+              <div style="width:22px;height:22px;border-radius:50%;background:#F5F2ED;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:600;color:#5F5E5A">KD</div>
+              <span style="font-size:12px;color:#5F5E5A">Kwame Dogli · Agronomist</span>
+            </div>
+            <div style="display:flex;gap:2px"><span style="color:#EF9F27;font-size:11px">★★★★☆</span></div>
+          </div>
+        </div>
+        <div class="card" style="padding:13px;margin-bottom:9px;cursor:pointer" onclick="go('answer')">
+          <p style="font-size:13px;color:#2C2C2A;font-weight:500;line-height:1.4;margin-bottom:7px">My 4-year-old has had a fever — when to seek emergency care?</p>
+          <p style="font-size:12px;color:#5F5E5A;line-height:1.5;margin-bottom:9px">"Seek emergency care immediately if the child has a stiff neck, rash that doesn't fade on pressure, difficulty breathing, or is unusually difficult to wake…"</p>
+          <div style="display:flex;align-items:center;justify-content:space-between">
+            <div style="display:flex;align-items:center;gap:6px">
+              <div style="width:22px;height:22px;border-radius:50%;background:#E1F5EE;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:600;color:#0F6E56">AK</div>
+              <span style="font-size:12px;color:#5F5E5A">Dr. Akua Mensah · Pediatrician</span>
+            </div>
+            <div style="display:flex;gap:2px"><span style="color:#EF9F27;font-size:11px">★★★★★</span></div>
+          </div>
+        </div>
+        <div class="card" style="padding:13px;margin-bottom:9px;cursor:pointer">
+          <p style="font-size:13px;color:#2C2C2A;font-weight:500;line-height:1.4;margin-bottom:7px">Paracetamol dosage for a 6-year-old weighing 20kg?</p>
+          <p style="font-size:12px;color:#5F5E5A;line-height:1.5;margin-bottom:9px">"The standard dose is 15mg per kg, so for a 20kg child that is 300mg every 6 hours. Do not exceed 4 doses in 24 hours…"</p>
+          <div style="display:flex;align-items:center;justify-content:space-between">
+            <div style="display:flex;align-items:center;gap:6px">
+              <div style="width:22px;height:22px;border-radius:50%;background:#E1F5EE;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:600;color:#0F6E56">AK</div>
+              <span style="font-size:12px;color:#5F5E5A">Dr. Akua Mensah · Pediatrician</span>
+            </div>
+            <div style="display:flex;gap:2px"><span style="color:#EF9F27;font-size:11px">★★★★★</span></div>
+          </div>
+        </div>
+        <div style="text-align:center;padding:8px"><p style="font-size:12px;color:#D85A30;font-weight:500;cursor:pointer">Load 20 more answers</p></div>
+      </div>
+      <div class="bnav">
+        <div class="bni" onclick="go('home')"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#888780" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1z"/><path d="M9 21V12h6v9"/></svg><span class="bni-l">Home</span></div>
+        <div class="bni on"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#D85A30" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg><span class="bni-l" style="color:#D85A30">Library</span></div>
+        <div class="bfab-wrap"><div class="bfab" onclick="go('record')"><svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M12 1a4 4 0 014 4v7a4 4 0 01-8 0V5a4 4 0 014-4z"/></svg></div></div>
+        <div class="bni" onclick="go('chats')"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#888780" stroke-width="1.5" stroke-linecap="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg><span class="bni-l">Chats</span></div>
+        <div class="bni" onclick="go('profile')"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#888780" stroke-width="1.5" stroke-linecap="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span class="bni-l">Profile</span></div>
+      </div>
+    </div>
+
+    <!-- ══════ CHATS (NEW) ══════ -->
+    <div class="scn" id="s-chats">
+      <div class="sheader">
+        <div class="back" onclick="go('home')"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2C2C2A" stroke-width="1.6" stroke-linecap="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></div>
+        <div style="display:flex;align-items:center;gap:9px;flex:1">
+          <div style="width:36px;height:36px;border-radius:50%;background:#E1F5EE;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;color:#0F6E56;flex-shrink:0">AK</div>
+          <div>
+            <p style="font-size:14px;font-weight:500;color:#2C2C2A;cursor:pointer" onclick="go('specialist')">Dr. Akua Mensah</p>
+            <div style="display:flex;align-items:center;gap:4px"><span style="width:6px;height:6px;background:#1D9E75;border-radius:50%"></span><span style="font-size:11px;color:#1D9E75">Online</span></div>
+          </div>
+        </div>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#888780" stroke-width="1.5" stroke-linecap="round" style="cursor:pointer"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
+      </div>
+      <div class="sc" style="padding:14px 16px;display:flex;flex-direction:column;gap:12px">
+        <div style="text-align:center"><span style="font-size:11px;color:#888780;background:#F0EDE8;padding:3px 12px;border-radius:100px">Today · 9:41 AM</span></div>
+
+        <div style="display:flex;align-items:flex-end;gap:8px">
+          <div style="width:30px;height:30px;border-radius:50%;background:#E1F5EE;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:#0F6E56;flex-shrink:0">AK</div>
+          <div style="max-width:72%">
+            <div style="background:#fff;border:.5px solid #E8E6E0;border-radius:14px 14px 14px 4px;padding:11px 13px;margin-bottom:3px">
+              <p style="font-size:13px;color:#2C2C2A;line-height:1.5">Hello Ama, I have listened to your voice message. A fever of 39°C lasting over 24 hours in a 4-year-old warrants careful monitoring.</p>
+            </div>
+            <p style="font-size:11px;color:#888780">9:42 AM</p>
+          </div>
+        </div>
+
+        <div style="display:flex;align-items:flex-end;gap:8px">
+          <div style="width:30px;height:30px;border-radius:50%;background:#E1F5EE;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:#0F6E56;flex-shrink:0">AK</div>
+          <div style="max-width:72%">
+            <div style="background:#fff;border:.5px solid #E8E6E0;border-radius:14px 14px 14px 4px;padding:11px 13px;margin-bottom:3px">
+              <div style="display:flex;align-items:center;gap:9px">
+                <div style="width:30px;height:30px;background:#FAECE7;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0"><svg width="12" height="12" viewBox="0 0 24 24" fill="#D85A30"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
+                <div id="chat-wave" style="display:flex;align-items:center;gap:1.5px;height:28px;flex:1"></div>
+                <span style="font-size:11px;color:#888780;flex-shrink:0">0:42</span>
+              </div>
+            </div>
+            <p style="font-size:11px;color:#888780">9:43 AM</p>
+          </div>
+        </div>
+
+        <div style="display:flex;justify-content:flex-end">
+          <div style="max-width:72%">
+            <div style="background:#D85A30;border-radius:14px 14px 4px 14px;padding:11px 13px;margin-bottom:3px">
+              <p style="font-size:13px;color:#fff;line-height:1.5">Thank you Doctor. She also has a slight rash on her arms since this morning. Should I bring her to the clinic?</p>
+            </div>
+            <p style="font-size:11px;color:#888780;text-align:right">9:46 AM · Sent</p>
+          </div>
+        </div>
+
+        <div style="display:flex;align-items:flex-end;gap:8px">
+          <div style="width:30px;height:30px;border-radius:50%;background:#E1F5EE;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:#0F6E56;flex-shrink:0">AK</div>
+          <div style="max-width:72%">
+            <div style="background:#fff;border:.5px solid #E8E6E0;border-radius:14px 14px 14px 4px;padding:11px 13px;margin-bottom:3px">
+              <p style="font-size:13px;color:#E24B4A;font-weight:500;margin-bottom:4px">Yes — please go now.</p>
+              <p style="font-size:13px;color:#2C2C2A;line-height:1.5">A fever with a new rash can indicate roseola or, in rare cases, meningitis. Please go to the clinic immediately and mention both symptoms.</p>
+            </div>
+            <p style="font-size:11px;color:#888780">9:47 AM</p>
+          </div>
+        </div>
+
+        <div style="display:flex;justify-content:flex-end">
+          <div style="max-width:72%">
+            <div style="background:#D85A30;border-radius:14px 14px 4px 14px;padding:11px 13px;margin-bottom:3px">
+              <div style="display:flex;align-items:center;gap:9px">
+                <div style="width:30px;height:30px;background:rgba(255,255,255,.25);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0"><svg width="12" height="12" viewBox="0 0 24 24" fill="white"><path d="M12 1a4 4 0 014 4v7a4 4 0 01-8 0V5a4 4 0 014-4z"/></svg></div>
+                <div id="chat-wave2" style="display:flex;align-items:center;gap:1.5px;height:28px;flex:1"></div>
+                <span style="font-size:11px;color:rgba(255,255,255,.7);flex-shrink:0">0:08</span>
+              </div>
+            </div>
+            <p style="font-size:11px;color:#888780;text-align:right">9:48 AM · Sent</p>
+          </div>
+        </div>
+
+        <div style="display:flex;align-items:flex-end;gap:8px">
+          <div style="width:30px;height:30px;border-radius:50%;background:#E1F5EE;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:#0F6E56;flex-shrink:0">AK</div>
+          <div style="max-width:52%">
+            <div style="background:#fff;border:.5px solid #E8E6E0;border-radius:14px 14px 14px 4px;padding:11px 13px;margin-bottom:3px">
+              <p style="font-size:13px;color:#2C2C2A">Good. Let me know what they say. I am available for the next 2 hours.</p>
+            </div>
+            <p style="font-size:11px;color:#888780">9:49 AM</p>
+          </div>
+        </div>
+      </div>
+      <div style="flex-shrink:0;padding:10px 12px 22px;background:#fff;border-top:.5px solid #E8E6E0">
+        <div style="display:flex;align-items:center;gap:8px">
+          <div style="width:36px;height:36px;background:#F0EDE8;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5F5E5A" stroke-width="1.5" stroke-linecap="round"><path d="M12 1a4 4 0 014 4v7a4 4 0 01-8 0V5a4 4 0 014-4z"/></svg>
+          </div>
+          <div style="flex:1;background:#F5F2ED;border-radius:24px;padding:10px 14px">
+            <p style="font-size:14px;color:#B4B2A9">Type or hold to record…</p>
+          </div>
+          <div style="width:36px;height:36px;background:#D85A30;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="white"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="pills">
+  <button class="pill on" id="p-home" onclick="go('home')">Home</button>
+  <button class="pill" id="p-record" onclick="go('record')">Record</button>
+  <button class="pill" id="p-answer" onclick="go('answer')">Answer</button>
+  <button class="pill" id="p-feed" onclick="go('feed')">Specialist feed</button>
+  <button class="pill" id="p-emergency" onclick="go('emergency')">Emergency</button>
+  <button class="pill" id="p-profile" onclick="go('profile')">Profile</button>
+  <button class="pill" id="p-settings" onclick="go('settings')">Settings</button>
+  <button class="pill" id="p-specialist" onclick="go('specialist')">Dr. Akua profile</button>
+  <button class="pill" id="p-library" onclick="go('library')">Library</button>
+  <button class="pill" id="p-chats" onclick="go('chats')">Chats</button>
+</div>
+
+<p style="font-size:11px;color:var(--color-text-secondary);text-align:center">Sema · Flutter/Dart · Android first · P2P · Voice-native</p>
+</div>
+
+<script>
+const scns=['home','record','answer','feed','emergency','profile','settings','specialist','library','chats'];
+function go(id){
+  scns.forEach(s=>{
+    const el=document.getElementById('s-'+s);
+    if(el) el.classList.toggle('on',s===id);
+    const p=document.getElementById('p-'+s);
+    if(p) p.classList.toggle('on',s===id);
+  });
+}
+function buildWave(el,count,played,inv){
+  const hs=[20,32,16,40,28,48,18,36,52,22,44,30,56,20,38,46,24,42,34,56,16,44,28,36,50,18,40,22,32,48];
+  const threshold=Math.floor(count*.35);
+  for(let i=0;i<count;i++){
+    const h=hs[i%hs.length];
+    const s=document.createElement('span');
+    const done=played&&i<threshold;
+    const col=inv?(done?'rgba(255,255,255,.9)':'rgba(255,255,255,.35)'):(done?'#D85A30':'#E8E6E0');
+    s.style.cssText=`display:block;width:3px;border-radius:2px;height:${h}px;background:${col};transform-origin:center;flex-shrink:0`;
+    if(!played){const dur=(0.55+Math.random()*0.45).toFixed(2);const delay=(i*0.026).toFixed(3);s.style.animation=`wB ${dur}s ease-in-out ${delay}s infinite alternate`;}
+    el.appendChild(s);
+  }
+}
+function init(){
+  const rw=document.getElementById('rec-wave');
+  if(rw&&!rw.children.length) buildWave(rw,36,false,false);
+  const pw=document.getElementById('play-wave');
+  if(pw&&!pw.children.length) buildWave(pw,42,true,false);
+  const cw=document.getElementById('chat-wave');
+  if(cw&&!cw.children.length) buildWave(cw,28,true,false);
+  const cw2=document.getElementById('chat-wave2');
+  if(cw2&&!cw2.children.length) buildWave(cw2,18,true,true);
+}
+document.addEventListener('DOMContentLoaded',init);
+setTimeout(init,800);
+</script>

@@ -1,0 +1,403 @@
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/plus-jakarta-sans@5/400.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/plus-jakarta-sans@5/500.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/plus-jakarta-sans@5/600.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/plus-jakarta-sans@5/700.css">
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:transparent}
+
+:root{
+  --g1:#3A9828;--g2:#4DAF38;--g3:#EBF7E6;--g4:#D4EFCC;
+  --m1:#8B1A3C;--m2:#A82050;--m3:#F9EEF2;
+  --dark:#252525;--mid:#555;--soft:#888;--pale:#F6F8F5;
+  --white:#fff;--border:#E2EBE0;
+}
+
+.scene{display:flex;gap:28px;justify-content:center;align-items:flex-start;padding:24px 16px;flex-wrap:wrap}
+
+.phone{width:320px;background:var(--white);border-radius:42px;overflow:hidden;border:1.5px solid #ccc;position:relative;box-shadow:none}
+.phone.secondary{width:220px;margin-top:40px;opacity:0.92}
+
+.notch{background:var(--dark);height:10px;width:80px;border-radius:0 0 14px 14px;position:absolute;top:0;left:50%;transform:translateX(-50%);z-index:10}
+.status{background:var(--dark);padding:14px 20px 8px;display:flex;justify-content:space-between;align-items:center}
+.status span{color:rgba(255,255,255,0.75);font-size:11px;font-weight:500;letter-spacing:0.01em}
+
+.header{background:var(--dark);padding:10px 18px 20px;position:relative;overflow:hidden}
+.header::after{content:'';position:absolute;bottom:-30px;right:-20px;width:120px;height:120px;border-radius:50%;background:rgba(61,152,40,0.12);pointer-events:none}
+.header::before{content:'';position:absolute;top:-20px;right:30px;width:70px;height:70px;border-radius:50%;background:rgba(139,26,60,0.1);pointer-events:none}
+
+.hdr-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.logo-row{display:flex;align-items:center;gap:9px}
+.logo-mark{width:34px;height:34px;flex-shrink:0}
+.logo-text{}
+.logo-name{font-size:13px;font-weight:700;color:#fff;letter-spacing:-0.01em;line-height:1.1}
+.logo-sub{font-size:9px;color:#6CC957;font-weight:500;letter-spacing:0.04em;text-transform:uppercase}
+.bell-wrap{position:relative;cursor:pointer}
+.bell-btn{width:34px;height:34px;background:rgba(255,255,255,0.1);border-radius:50%;display:flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,0.15)}
+.bell-btn svg{width:15px;height:15px;fill:#fff}
+.bell-dot{position:absolute;top:5px;right:5px;width:8px;height:8px;background:#EF9F27;border-radius:50%;border:1.5px solid var(--dark)}
+
+.greet-row{display:flex;justify-content:space-between;align-items:flex-end}
+.greet-label{font-size:11px;color:rgba(255,255,255,0.5);font-weight:400;margin-bottom:1px}
+.greet-name{font-size:19px;font-weight:700;color:#fff;letter-spacing:-0.02em}
+.date-pill{background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.15);border-radius:20px;padding:4px 10px;font-size:10px;color:rgba(255,255,255,0.7);font-weight:500}
+
+.content{overflow-y:auto;height:460px;background:var(--pale)}
+.scroll-inner{padding:14px}
+
+.stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px}
+.stat-card{background:var(--white);border-radius:14px;padding:10px 8px;text-align:center;border:1px solid var(--border)}
+.stat-val{font-size:20px;font-weight:700;letter-spacing:-0.03em}
+.stat-label{font-size:9.5px;color:var(--soft);font-weight:500;margin-top:1px;line-height:1.2}
+.v-green{color:var(--g1)}
+.v-maroon{color:var(--m1)}
+.v-amber{color:#C47A10}
+
+.section-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:9px}
+.sec-title{font-size:11px;font-weight:700;color:var(--dark);letter-spacing:0.04em;text-transform:uppercase}
+.sec-link{font-size:11px;color:var(--g1);font-weight:600}
+
+.tiles-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px}
+.tile{display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer}
+.tile-ico{width:50px;height:50px;border-radius:15px;display:flex;align-items:center;justify-content:center;font-size:20px;position:relative;border:1px solid rgba(0,0,0,0.06)}
+.tile-badge{position:absolute;top:-4px;right:-4px;min-width:17px;height:17px;background:var(--m1);border-radius:9px;font-size:9px;font-weight:700;color:#fff;display:flex;align-items:center;justify-content:center;border:2px solid var(--pale);padding:0 3px}
+.tile-name{font-size:10px;color:var(--mid);font-weight:500;text-align:center;line-height:1.2}
+
+.ann-card{background:var(--white);border-radius:16px;padding:13px;margin-bottom:10px;border:1px solid var(--border);cursor:pointer;transition:border-color 0.2s}
+.ann-card:hover{border-color:var(--g2)}
+.ann-top{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.ann-avatar{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0}
+.av-green{background:var(--g3);color:var(--g1)}
+.av-maroon{background:var(--m3);color:var(--m1)}
+.av-amber{background:#FEF3DC;color:#A06B0A}
+.ann-meta{flex:1}
+.ann-by{font-size:11px;font-weight:600;color:var(--dark)}
+.ann-when{font-size:10px;color:var(--soft)}
+.tag{font-size:9.5px;font-weight:700;padding:3px 8px;border-radius:6px;letter-spacing:0.02em}
+.tag-urgent{background:var(--m3);color:var(--m1)}
+.tag-event{background:var(--g3);color:var(--g1)}
+.tag-info{background:#E6F1FB;color:#185FA5}
+.unread-pip{width:7px;height:7px;background:#185FA5;border-radius:50%;flex-shrink:0}
+.ann-title{font-size:12.5px;font-weight:600;color:var(--dark);margin-bottom:3px;line-height:1.35}
+.ann-body{font-size:11px;color:var(--soft);line-height:1.5}
+
+.nav-bar{background:var(--white);border-top:1px solid var(--border);display:flex;justify-content:space-around;padding:8px 0 14px}
+.nav-item{display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;padding:4px 6px;border-radius:10px;position:relative;border:none;background:none}
+.nav-item svg{width:20px;height:20px}
+.nav-item span{font-size:9.5px;font-weight:500;font-family:'Plus Jakarta Sans',sans-serif}
+.nav-item.on svg{fill:var(--g1)}
+.nav-item.on span{color:var(--g1)}
+.nav-item svg{fill:var(--soft)}
+.nav-item span{color:var(--soft)}
+.nav-badge{position:absolute;top:2px;right:1px;background:var(--m1);color:#fff;font-size:8.5px;min-width:14px;height:14px;border-radius:7px;display:flex;align-items:center;justify-content:center;padding:0 3px;font-weight:700}
+
+.home-indicator{background:var(--white);padding:6px 0 10px;display:flex;justify-content:center}
+.hi-bar{width:100px;height:4px;background:#ccc;border-radius:2px}
+
+.tab-section{display:none}
+.tab-section.show{display:block}
+
+.search-box{background:var(--white);border-radius:12px;padding:9px 12px;display:flex;align-items:center;gap:8px;margin-bottom:14px;border:1px solid var(--border)}
+.search-box svg{width:14px;height:14px;fill:var(--soft);flex-shrink:0}
+.search-box span{font-size:12px;color:var(--soft);font-weight:400}
+
+.apps-cat{margin-bottom:14px}
+.apps-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px 8px}
+
+.inbox-item{display:flex;align-items:flex-start;gap:10px;background:var(--white);border-radius:14px;padding:11px;margin-bottom:8px;border:1px solid var(--border);cursor:pointer}
+.inbox-ico{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0;border:1px solid var(--border)}
+.inbox-body{flex:1;min-width:0}
+.inbox-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:2px}
+.inbox-from{font-size:12px;font-weight:600;color:var(--dark)}
+.inbox-time{font-size:10px;color:var(--soft)}
+.inbox-subj{font-size:11.5px;color:var(--dark);margin-bottom:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.inbox-prev{font-size:10.5px;color:var(--soft);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.inbox-num{background:var(--g1);color:#fff;font-size:9.5px;font-weight:700;min-width:18px;height:18px;border-radius:9px;display:flex;align-items:center;justify-content:center;padding:0 4px;flex-shrink:0;margin-top:2px}
+
+.profile-hero{background:var(--dark);border-radius:18px;padding:18px;margin-bottom:14px;text-align:center;position:relative;overflow:hidden}
+.profile-hero::after{content:'';position:absolute;bottom:-20px;right:-20px;width:80px;height:80px;border-radius:50%;background:rgba(61,152,40,0.15)}
+.p-avatar{width:56px;height:56px;border-radius:50%;background:var(--g3);border:2.5px solid var(--g1);margin:0 auto 8px;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700;color:var(--g1)}
+.p-name{font-size:15px;font-weight:700;color:#fff}
+.p-role{font-size:11px;color:rgba(255,255,255,0.5);margin-top:2px}
+.p-role span{color:#6CC957;font-weight:600}
+
+.settings-row{display:flex;align-items:center;justify-content:space-between;background:var(--white);border-radius:12px;padding:11px 13px;margin-bottom:7px;border:1px solid var(--border)}
+.sett-l{display:flex;align-items:center;gap:10px}
+.sett-ico{width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px}
+.sett-name{font-size:12.5px;font-weight:500;color:var(--dark)}
+.sett-r{font-size:12px;color:var(--soft)}
+.toggle{width:34px;height:18px;background:var(--g1);border-radius:9px;position:relative}
+.tknob{position:absolute;right:3px;top:3px;width:12px;height:12px;background:#fff;border-radius:50%}
+
+.filter-row{display:flex;gap:7px;margin-bottom:12px;flex-wrap:wrap}
+.chip{font-size:10.5px;font-weight:600;padding:5px 11px;border-radius:20px;border:1.5px solid var(--border);cursor:pointer;color:var(--mid);background:var(--white)}
+.chip.active{background:var(--dark);color:#fff;border-color:var(--dark)}
+
+.sec-spacer{height:10px}
+</style>
+
+<div class="scene">
+
+<div class="phone">
+  <div class="notch"></div>
+  <div class="status">
+    <span>9:41</span>
+    <span style="font-size:13px;color:rgba(255,255,255,0.4)">●●●</span>
+  </div>
+  <div class="header">
+    <div class="hdr-top">
+      <div class="logo-row">
+        <svg class="logo-mark" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="50" cy="48" r="42" fill="#3A9828"/>
+          <path d="M50 80 L50 52 L35 38 M50 52 L65 36 M50 60 L38 48 M50 60 L62 46 M50 45 L44 34 M50 45 L56 32 M50 38 Q48 28 50 20 Q52 28 50 38" stroke="white" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+          <path d="M14 78 Q10 92 20 95" stroke="#8B1A3C" stroke-width="4" fill="none" stroke-linecap="round"/>
+          <path d="M20 95 Q50 105 80 95" stroke="#8B1A3C" stroke-width="4" fill="none" stroke-linecap="round"/>
+        </svg>
+        <div class="logo-text">
+          <div class="logo-name">LumaHub</div>
+          <div class="logo-sub">branded organisation portal</div>
+        </div>
+      </div>
+      <div class="bell-wrap" onclick="switchTab('inbox')">
+        <div class="bell-btn"><svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 1 7 7v4l2 3H3l2-3V9a7 7 0 0 1 7-7zm0 20a2 2 0 0 1-2-2h4a2 2 0 0 1-2 2z"/></svg></div>
+        <div class="bell-dot"></div>
+      </div>
+    </div>
+    <div class="greet-row">
+      <div>
+         <div class="greet-label">Welcome back,</div>
+         <div class="greet-name">Alex Morgan</div>
+      </div>
+       <div class="date-pill">Fri 10 Apr</div>
+    </div>
+  </div>
+
+  <div class="content">
+
+    <div id="t-home" class="tab-section show">
+      <div class="scroll-inner">
+        <div class="stats-row">
+          <div class="stat-card"><div class="stat-val v-maroon">14</div><div class="stat-label">Unread alerts</div></div>
+          <div class="stat-card"><div class="stat-val v-green">3</div><div class="stat-label">New updates</div></div>
+          <div class="stat-card"><div class="stat-val v-amber">2</div><div class="stat-label">Upcoming events</div></div>
+        </div>
+
+        <div class="section-head"><span class="sec-title">Quick access</span><span class="sec-link" onclick="switchTab('apps')">View all</span></div>
+        <div class="tiles-grid">
+          <div class="tile"><div class="tile-ico" style="background:#EBF4FD"><span>💬</span><div class="tile-badge">5</div></div><div class="tile-name">Slack</div></div>
+          <div class="tile"><div class="tile-ico" style="background:#EBF8EF"><span>📞</span><div class="tile-badge">3</div></div><div class="tile-name">Support</div></div>
+          <div class="tile"><div class="tile-ico" style="background:#FEF9EC"><span>📧</span><div class="tile-badge">6</div></div><div class="tile-name">Email</div></div>
+          <div class="tile"><div class="tile-ico" style="background:#F0EFFE"><span>📅</span></div><div class="tile-name">Calendar</div></div>
+          <div class="tile"><div class="tile-ico" style="background:var(--m3)"><span>👥</span></div><div class="tile-name">HR</div></div>
+          <div class="tile"><div class="tile-ico" style="background:var(--g3)"><span>📊</span></div><div class="tile-name">CRM</div></div>
+          <div class="tile"><div class="tile-ico" style="background:#FEF0EB"><span>💼</span></div><div class="tile-name">Finance</div></div>
+          <div class="tile" onclick="switchTab('apps')"><div class="tile-ico" style="background:#F0F0F0"><span style="font-size:16px;color:#888">•••</span></div><div class="tile-name">All apps</div></div>
+        </div>
+
+        <div class="section-head"><span class="sec-title">Latest updates</span><span class="sec-link" onclick="switchTab('updates')">View all</span></div>
+
+        <div class="ann-card">
+          <div class="ann-top">
+            <div class="ann-avatar av-maroon">OP</div>
+            <div class="ann-meta"><div class="ann-by">Operations</div><div class="ann-when">Today 8:30</div></div>
+            <span class="tag tag-urgent">Urgent</span>
+            <div class="unread-pip"></div>
+          </div>
+          <div class="ann-title">Workspace access policy updated</div>
+          <div class="ann-body">All managers must review new access approvals before 3:00 PM.</div>
+        </div>
+
+        <div class="ann-card">
+          <div class="ann-top">
+            <div class="ann-avatar av-green">PM</div>
+            <div class="ann-meta"><div class="ann-by">Programme Team</div><div class="ann-when">Yesterday</div></div>
+            <span class="tag tag-event">Event</span>
+          </div>
+          <div class="ann-title">Quarterly planning review — 28 April</div>
+          <div class="ann-body">Department leads should confirm attendance and submit agenda items by Friday.</div>
+        </div>
+      </div>
+    </div>
+
+    <div id="t-apps" class="tab-section">
+      <div class="scroll-inner">
+        <div class="search-box"><svg viewBox="0 0 24 24"><path d="M21 21l-4.35-4.35M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0z" stroke="#888" fill="none" stroke-width="2" stroke-linecap="round"/></svg><span>Search an app…</span></div>
+        <div class="apps-cat">
+          <div class="section-head"><span class="sec-title">Communication</span></div>
+          <div class="apps-grid">
+            <div class="tile"><div class="tile-ico" style="background:#EBF4FD"><span>💬</span><div class="tile-badge">5</div></div><div class="tile-name">Slack</div></div>
+            <div class="tile"><div class="tile-ico" style="background:#EBF8EF"><span>📞</span><div class="tile-badge">3</div></div><div class="tile-name">Support</div></div>
+            <div class="tile"><div class="tile-ico" style="background:#FEF9EC"><span>📧</span><div class="tile-badge">6</div></div><div class="tile-name">Email</div></div>
+            <div class="tile"><div class="tile-ico" style="background:#F0F4FF"><span>📮</span></div><div class="tile-name">Outlook</div></div>
+          </div>
+        </div>
+        <div class="apps-cat">
+          <div class="section-head"><span class="sec-title">Operations</span></div>
+          <div class="apps-grid">
+            <div class="tile"><div class="tile-ico" style="background:var(--m3)"><span>👥</span></div><div class="tile-name">HR</div></div>
+            <div class="tile"><div class="tile-ico" style="background:var(--g3)"><span>📊</span></div><div class="tile-name">CRM</div></div>
+            <div class="tile"><div class="tile-ico" style="background:#FEF0EB"><span>💼</span></div><div class="tile-name">Finance</div></div>
+            <div class="tile"><div class="tile-ico" style="background:#F0EFFE"><span>📋</span></div><div class="tile-name">Projects</div></div>
+            <div class="tile"><div class="tile-ico" style="background:#FEF9EC"><span>🧾</span></div><div class="tile-name">Billing</div></div>
+            <div class="tile"><div class="tile-ico" style="background:#EBF8EF"><span>📈</span></div><div class="tile-name">Reports</div></div>
+          </div>
+        </div>
+        <div class="apps-cat">
+          <div class="section-head"><span class="sec-title">Resources</span></div>
+          <div class="apps-grid">
+            <div class="tile"><div class="tile-ico" style="background:#F0EFFE"><span>📅</span></div><div class="tile-name">Calendar</div></div>
+            <div class="tile"><div class="tile-ico" style="background:#EBF4FD"><span>📁</span></div><div class="tile-name">Drive</div></div>
+            <div class="tile"><div class="tile-ico" style="background:#EBF8EF"><span>📝</span></div><div class="tile-name">Docs</div></div>
+            <div class="tile"><div class="tile-ico" style="background:#FEF9EC"><span>🎥</span></div><div class="tile-name">Meet</div></div>
+            <div class="tile"><div class="tile-ico" style="background:var(--m3)"><span>🏢</span></div><div class="tile-name">Intranet</div></div>
+            <div class="tile" style="opacity:0.5"><div class="tile-ico" style="background:#F0F0F0"><span style="font-size:14px">➕</span></div><div class="tile-name">Add</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="t-updates" class="tab-section">
+      <div class="scroll-inner">
+        <div class="filter-row">
+          <div class="chip active">All</div>
+          <div class="chip">Urgent</div>
+          <div class="chip">Event</div>
+          <div class="chip">Info</div>
+        </div>
+        <div class="ann-card">
+          <div class="ann-top">
+            <div class="ann-avatar av-maroon">OP</div>
+            <div class="ann-meta"><div class="ann-by">Operations</div><div class="ann-when">Today 8:30</div></div>
+            <span class="tag tag-urgent">Urgent</span>
+            <div class="unread-pip"></div>
+          </div>
+          <div class="ann-title">Workspace access policy updated</div>
+          <div class="ann-body">All managers must review new access approvals before 3:00 PM.</div>
+        </div>
+        <div class="ann-card">
+          <div class="ann-top">
+            <div class="ann-avatar av-green">PM</div>
+            <div class="ann-meta"><div class="ann-by">Programme Team</div><div class="ann-when">Yesterday 14:00</div></div>
+            <span class="tag tag-event">Event</span>
+          </div>
+          <div class="ann-title">Quarterly planning review — 28 April</div>
+          <div class="ann-body">Department leads should confirm attendance and submit agenda items by Friday.</div>
+        </div>
+        <div class="ann-card">
+          <div class="ann-top">
+            <div class="ann-avatar av-amber" style="background:#FEF3DC;color:#A06B0A">IT</div>
+            <div class="ann-meta"><div class="ann-by">IT Support</div><div class="ann-when">Mon 9:00</div></div>
+            <span class="tag tag-info">Info</span>
+          </div>
+          <div class="ann-title">Scheduled maintenance — Saturday 22:00–24:00</div>
+          <div class="ann-body">The analytics workspace will be unavailable for 2 hours. No action required.</div>
+        </div>
+        <div class="ann-card">
+          <div class="ann-top">
+            <div class="ann-avatar av-maroon">HR</div>
+            <div class="ann-meta"><div class="ann-by">People Ops · HR</div><div class="ann-when">Last week</div></div>
+            <span class="tag tag-urgent" style="background:var(--g3);color:var(--g1)">Admin</span>
+          </div>
+          <div class="ann-title">Time-off requests — June window open</div>
+          <div class="ann-body">Submit your requests through the HR workspace before 30 April.</div>
+        </div>
+      </div>
+    </div>
+
+    <div id="t-inbox" class="tab-section">
+      <div class="scroll-inner">
+        <div class="section-head"><span class="sec-title">All messages · 14 unread</span></div>
+        <div class="inbox-item">
+          <div class="inbox-ico" style="background:#EBF4FD">💬</div>
+          <div class="inbox-body">
+            <div class="inbox-row"><span class="inbox-from">Slack — #operations</span><span class="inbox-time">9:12</span></div>
+            <div class="inbox-subj">Jordan: “Can we approve the launch checklist today?”</div>
+            <div class="inbox-prev">+4 messages in this channel</div>
+          </div>
+          <div class="inbox-num">5</div>
+        </div>
+        <div class="inbox-item">
+          <div class="inbox-ico" style="background:#FEF9EC">📧</div>
+          <div class="inbox-body">
+            <div class="inbox-row"><span class="inbox-from">Email</span><span class="inbox-time">8:55</span></div>
+            <div class="inbox-subj">Client onboarding pack — updated checklist</div>
+            <div class="inbox-prev">Please review the revised launch requirements…</div>
+          </div>
+          <div class="inbox-num">6</div>
+        </div>
+        <div class="inbox-item">
+          <div class="inbox-ico" style="background:#EBF8EF">📞</div>
+          <div class="inbox-body">
+            <div class="inbox-row"><span class="inbox-from">Support Desk</span><span class="inbox-time">8:40</span></div>
+            <div class="inbox-subj">Priority ticket escalated for finance workspace</div>
+            <div class="inbox-prev">+2 updates</div>
+          </div>
+          <div class="inbox-num">3</div>
+        </div>
+        <div class="inbox-item">
+          <div class="inbox-ico" style="background:#F0EFFE">📅</div>
+          <div class="inbox-body">
+            <div class="inbox-row"><span class="inbox-from">Calendar</span><span class="inbox-time">Today</span></div>
+            <div class="inbox-subj">Reminder: leadership sync at 14:00</div>
+            <div class="inbox-prev">Boardroom B12 · 1h · 8 attendees</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="t-profile" class="tab-section">
+      <div class="scroll-inner">
+        <div class="profile-hero">
+          <div class="p-avatar">AM</div>
+          <div class="p-name">Alex Morgan</div>
+          <div class="p-role">Operations Manager · <span>North Region</span></div>
+        </div>
+        <div class="section-head" style="margin-bottom:9px"><span class="sec-title">Notifications</span></div>
+        <div class="settings-row"><div class="sett-l"><div class="sett-ico" style="background:var(--g3)">🔔</div><div class="sett-name">All notifications</div></div><div class="toggle"><div class="tknob"></div></div></div>
+        <div class="settings-row"><div class="sett-l"><div class="sett-ico" style="background:var(--m3)">⚡</div><div class="sett-name">Urgent only</div></div><span class="sett-r">›</span></div>
+        <div class="sec-spacer"></div>
+        <div class="section-head" style="margin-bottom:9px"><span class="sec-title">Account</span></div>
+        <div class="settings-row"><div class="sett-l"><div class="sett-ico" style="background:var(--g3)">🔗</div><div class="sett-name">Connected apps (18)</div></div><span class="sett-r">›</span></div>
+        <div class="settings-row"><div class="sett-l"><div class="sett-ico" style="background:#F0F0F0">🌍</div><div class="sett-name">Language</div></div><span class="sett-r">English ›</span></div>
+        <div class="settings-row"><div class="sett-l"><div class="sett-ico" style="background:var(--m3)">🚪</div><div class="sett-name">Sign out</div></div><span class="sett-r" style="color:var(--m1)">›</span></div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="nav-bar">
+    <button class="nav-item on" id="n-home" onclick="switchTab('home')">
+      <svg viewBox="0 0 24 24"><path d="M3 12L12 3l9 9v9H15v-5H9v5H3v-9z"/></svg><span>Home</span>
+    </button>
+    <button class="nav-item" id="n-apps" onclick="switchTab('apps')">
+      <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg><span>Apps</span>
+    </button>
+    <button class="nav-item" id="n-updates" onclick="switchTab('updates')" style="position:relative">
+      <svg viewBox="0 0 24 24"><path d="M4 6h16M4 10h16M4 14h10" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"/></svg>
+      <span>Updates</span><div class="nav-badge">3</div>
+    </button>
+    <button class="nav-item" id="n-inbox" onclick="switchTab('inbox')" style="position:relative">
+      <svg viewBox="0 0 24 24"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+      <span>Inbox</span><div class="nav-badge">14</div>
+    </button>
+    <button class="nav-item" id="n-profile" onclick="switchTab('profile')">
+      <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2M12 11a4 4 0 100-8 4 4 0 000 8z" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg><span>Profile</span>
+    </button>
+  </div>
+  <div class="home-indicator"><div class="hi-bar"></div></div>
+</div>
+
+</div>
+
+<script>
+function switchTab(name){
+  document.querySelectorAll('.tab-section').forEach(t=>t.classList.remove('show'));
+  document.querySelectorAll('.nav-item').forEach(b=>b.classList.remove('on'));
+  document.getElementById('t-'+name).classList.add('show');
+  document.getElementById('n-'+name).classList.add('on');
+  document.querySelector('.content').scrollTop=0;
+}
+</script>
+
